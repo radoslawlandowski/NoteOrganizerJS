@@ -4,7 +4,6 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var User = require("../models/User.js");
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
   User.find(function (err, users) {
     if(err) return next(err);
@@ -26,7 +25,6 @@ router.post('/', function(req, res, next) {
   });
 });
 
-/* PUT /todos/:id */
 router.put('/:id', function(req, res, next) {
   User.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
