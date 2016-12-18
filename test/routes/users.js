@@ -1,4 +1,4 @@
-//add tests
+//add 2 tests
 
 var mongoose = require("mongoose");
 var User = require('../../models/User.js');
