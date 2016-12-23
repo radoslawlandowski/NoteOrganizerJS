@@ -11,6 +11,17 @@ var users = require('./routes/users');
 
 var app = express();
 
+var config;
+if(process.env.NODE_ENV == "testing") {
+  config = require('./configs/testing.json');
+} else {
+  config = require('./configs/production.json');
+}
+
+var databaseName = config.dbSettings.db;
+
+console.log(databaseName);
+
 mongoose.Promise = global.Promise;
 
 // view engine setup
@@ -47,8 +58,8 @@ app.use(function(err, req, res, next) {
 });
 
 // connect to MongoDB
-mongoose.connect('mongodb://localhost/NoteOrganizer')
-  .then(() =>  console.log('Successfully connected to database'))
+mongoose.connect('mongodb://localhost/' + databaseName)
+  .then(() =>  console.log('Successfully connected to database: ' + databaseName))
   .catch((err) => console.error(err));
 
 module.exports = app;
