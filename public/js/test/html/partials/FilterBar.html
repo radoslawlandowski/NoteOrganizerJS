@@ -1,0 +1,9 @@
+<div class="filter-bar">
+    <span class="filter-text">Sort by:</span>
+    <span class="filter-icon" ng-class="{'filter-icon-active' : isActive(property)}" ng-repeat="property in properties" ng-click="changeProperty(property)">
+        {{property}}
+        <span class="filter-text"> | </span>
+    </span>
+    <span ng-show="!ascending" class="glyphicon glyphicon-sort-by-attributes filter-icon" ng-click="changeOrder()"></span>
+    <span ng-show="ascending" class="glyphicon glyphicon-sort-by-attributes-alt filter-icon" ng-click="changeOrder()"></span>
+</div>

@@ -1,42 +1,43 @@
-//add 2 tests
-
 var mongoose = require("mongoose");
-var User = require('../../models/User.js');
-
-//Require the dev-dependencies
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../../bin/www');
 var should = chai.should();
-
-var usersData = require('../../data/initialUsers.json');
-
 chai.use(chaiHttp);
 
+var User = require('../../models/User.js');
+var TestHelper = require('../TestHelper');
+var TestUsers = require('../../data/TestUsers');
+
 var firstUser;
-var userId;
+var mail;
 
 describe('routes/user.js', () => {
+
+  before(function() {
+    firstUser = TestUsers.completeUser;
+    mail = firstUser.mail;
+
+    TestHelper.clearCollection();
+    TestHelper.populateCollection();
+  });
+
   describe('When GET request',() => {
-    before(function() {
-      firstUser = usersData.users[0];
-      userId = "585d599abdc2ba36bcd48dd6";
-    })
 
     it('without parameters it should get all the users', (done) => {
       chai.request(server)
-          .get('/users')
+          .get('/api/users')
           .end((err, res) => {
               res.should.have.status(200);
-              res.body.should.have.length(5);
+              res.body.should.have.length(3);
               res.body.should.be.a('array');
               res.body.length.should.be.not.eql(0);
             done();
           });
     });
 
-    it('with :id as parameter user data should be correct', (done) => {
-      var requestUrl = '/users/' + userId;
+    it('with :id as parameter user\'s notes should be correct', (done) => {
+      var requestUrl = '/api/users/' + mail;
 
       chai.request(server)
           .get(requestUrl)
@@ -50,48 +51,44 @@ describe('routes/user.js', () => {
                 res.body.should.have.property(property);
               });
 
-              res.body._id.should.equal(userId);
-              res.body.mail.should.equal(firstUser.mail);
-              res.body.password.should.equal(firstUser.password);
             done();
           });
     });
 
     it('with :id as parameter user\'s notes should be correct', (done) => {
       var firstNote = firstUser.notes[0];
-      var requestUrl = '/users/' + userId;
+      var requestUrl = '/api/users/' + mail + '/notes';
 
       chai.request(server)
           .get(requestUrl)
           .end((err, res) => {
-              res.body.notes.should.be.a('array');
-              res.body.notes.should.have.length(2);
+              res.body.should.be.a('array');
+              res.body.should.have.length(3);
 
-              var noteProperties = ['title', 'content', 'tab', '_id', 'updated_at'];
+              var noteProperties = ['title', 'content', 'tab', '_id', 'date'];
               noteProperties.forEach(function(property) {
-                res.body.notes[0].should.have.property(property);
+                res.body[0].should.have.property(property);
               });
 
-              res.body.notes[0].title.should.equal(firstNote.title);
-              res.body.notes[0].content.should.equal(firstNote.content);
-              res.body.notes[0].tab.should.equal(firstNote.tab);
-              res.body.notes[0]._id.should.equal('585d599abdc2ba36bcd48dd8');
+              res.body[0].title.should.equal(firstNote.title);
+              res.body[0].content.should.equal(firstNote.content);
+              res.body[0].tab.should.equal(firstNote.tab);
             done();
           });
     });
 
     it('with :id as parameter user\'s tabs should be correct', (done) => {
       var tabs = firstUser.tabs;
-      var requestUrl = '/users/' + userId;
+      var requestUrl = '/api/users/' + mail + '/tabs';
 
       chai.request(server)
           .get(requestUrl)
           .end((err, res) => {
-              res.body.tabs.should.have.length(3);
+              res.body.should.have.length(3);
 
       var index = 0;
       tabs.forEach(function(tab) {
-        res.body.tabs[index].should.equal(tab);
+        res.body[index].name.should.equal(tab.name);
         index++;
       });
       done();
