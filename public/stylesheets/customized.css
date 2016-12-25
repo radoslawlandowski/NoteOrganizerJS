@@ -1,0 +1,239 @@
+.well {
+    background: rgb(243, 243, 243);
+}
+
+.note-well {
+    background: rgb(253, 253, 253);
+}
+
+.jumbotron {
+    background: rgb(240, 240, 240);
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.btn-xsm {
+    padding: 8px 13px;
+    font-size: 10px;
+    border-radius: 2px;
+}
+
+.btn-high {
+    padding: 8px 26px;
+}
+
+.shadowed {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+h1 {
+    font-size: 60px;
+    color: rgb(40, 177, 215);
+}
+
+h4 {
+    color: rgb(169, 224, 239);
+}
+
+textarea {
+  resize: vertical; /* user can resize vertically, but width is fixed */
+}
+
+.fade.ng-enter {
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+.fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+.tabTitleTextInput {
+    line-height: 14px;
+    font-size: 14px;
+    height: 20px;
+    border: 0;
+}
+
+.no-border {
+    border: 0;
+}
+
+.text-input-styling {
+    border: 1px lightgrey;
+    border-style: solid;
+    border-radius: 2px;
+    background-color: white;
+    width: 100%;
+    line-height: 18px;
+}
+
+.date-field {
+    line-height: 18px;
+}
+
+.text-color {
+    color: grey;
+}
+
+.tabTitle {
+    color: rgb(86, 191, 224);
+    font-size: 17px;
+}
+
+.iconOnTab {
+    position: relative;
+    top: 2px;
+}
+
+.light-blue-color {
+    background-color: rgb(167, 224, 240)
+}
+
+.red-frame {
+    border: 1px solid red;
+    border-radius: 3px;
+}
+
+.redOnHover:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.red-on-hover:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.greenOnHover:hover {
+    color: rgb(33, 209, 21);
+    cursor: pointer;
+}
+
+.green-on-hover:hover {
+    color: rgb(33, 209, 21);
+    cursor: pointer;
+}
+
+.orange-on-hover:hover {
+    color: orange;
+    cursor: pointer;
+}
+
+.bisque-on-hover:hover {
+    background-color: bisque;
+}
+
+.big-icon {
+    font-size: 19px;
+    color: burlywood;
+}
+
+.extremely-big-icon {
+    font-size: 27px;
+}
+
+.color-burly-wood {
+    color:burlywood;
+}
+
+.really-big-icon {
+    font-size: 22px;
+    color: burlywood;
+    position: relative;
+    right: 10px;
+    padding-top: 2px;
+    padding-right: 8px;
+}
+
+.nav-tabs > li > a:hover {
+    color: #555555;
+    background-color: hsl(0, 0%, 100%);
+}
+
+growl-notifications {
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    z-index: 1000;
+}
+
+growl-notifications growl-notification {
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 15px 30px;
+    width: 300px;
+    display: block;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.notificationSuccess {
+    background: rgb(33, 209, 21);
+}
+
+.notificationWarning {
+    background: rgb(242, 174, 68);
+}
+
+.notificationError {
+    background: rgb(255, 0, 0);
+}
+
+.notificationInfo {
+    background: rgb(220, 220, 220);
+}
+
+.note-overall {
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-bottom: 55px;
+}
+
+.note-separator {
+    margin-top: 0px;
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-bottom: 45px;
+    border-top: 1px solid rgb(167, 224, 240);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}
+
+.info-top-margin {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.filter-icon {
+    color: grey;
+    font-size: 14px;
+    /*margin-left: 8px;*/
+}
+.filter-text {
+    color: grey;
+    font-size: 14px;
+}
+
+.filter-icon:hover {
+    color: burlywood;
+    cursor: pointer;
+}
+
+.filter-icon-active {
+    color: burlywood;
+}
+
+.filter-bar {
+    margin-right: 35px;
+}
+
+.new-tab-icon {
+    margin-top: 7px;
+}
+

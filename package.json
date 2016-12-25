@@ -16,11 +16,26 @@
     "mongodb": "^2.2.16",
     "mongoose": "^4.7.2",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
+    "requirejs": "^2.3.2",
+    "serve-favicon": "~2.3.0",
+    "angular": "^1.5.8",
+    "angular-animate": "^1.6.0",
+    "angular-bootstrap": "^0.12.2",
+    "angular-cookies": "^1.6.0",
+    "angular-filter": "^0.5.14",
+    "angular-growl-notifications": "^2.4.0",
+    "angular-ui-bootstrap": "^2.3.1",
+    "angular-ui-router": "^0.3.2",
+    "bootstrap": "^3.3.7",
+    "ng-dialog": "^0.6.4"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
     "mocha": "^3.2.0",
     "mocha-junit-reporter": "^1.12.1"
   }

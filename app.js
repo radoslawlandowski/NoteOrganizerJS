@@ -8,6 +8,9 @@ var mongoose = require('mongoose');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var tabs = require('./routes/tabs');
+//var notes = require('./routes/notes');
+
 
 var app = express();
 
@@ -25,7 +28,7 @@ console.log(databaseName);
 mongoose.Promise = global.Promise;
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -37,7 +40,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/api/users', users);
+//app.use('/api/users/:userId/tabs', tabs);
+//app.use('/api/users/:id/notes', notes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
