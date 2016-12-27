@@ -17,11 +17,14 @@ var app = express();
 var config;
 if(process.env.NODE_ENV == "testing") {
   config = require('./configs/testing.json');
-} else {
+} else if (process.env.NODE_ENV == "production") {
   config = require('./configs/production.json');
-}
+} else {
+  config = require('./configs/development.json');
+};
 
 var databaseName = config.dbSettings.db;
+var host = config.dbSettings.host;
 
 console.log(databaseName);
 
@@ -64,7 +67,7 @@ app.use(function(err, req, res, next) {
 });
 
 // connect to MongoDB
-mongoose.connect('mongodb://localhost/' + databaseName)
+mongoose.connect('mongodb://' + host + '/' + databaseName)
   .then(() =>  console.log('Successfully connected to database: ' + databaseName))
   .catch((err) => console.error(err));
 

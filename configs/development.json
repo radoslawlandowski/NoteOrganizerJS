@@ -1,0 +1,6 @@
+{
+    "dbSettings": {
+        "host": "localhost",
+        "db": "NoteOrganizer_Development"
+    }
+}

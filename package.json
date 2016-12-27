@@ -36,6 +36,9 @@
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
+    "grunt-env": "^0.4.4",
+    "grunt-mocha-test": "^0.13.2",
+    "grunt-npm-install": "^0.3.1",
     "mocha": "^3.2.0",
     "mocha-junit-reporter": "^1.12.1"
   }

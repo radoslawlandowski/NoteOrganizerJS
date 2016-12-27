@@ -1,13 +1,13 @@
 var mongoose = require("mongoose");
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-var server = require('../../bin/www');
 var should = chai.should();
 chai.use(chaiHttp);
+var server = require('../../../bin/www');
 
-var User = require('../../models/User.js');
-var TestHelper = require('../TestHelper');
-var TestUsers = require('../../data/TestUsers');
+var User = require('../../../models/User.js');
+var TestHelper = require('../../TestHelper');
+var TestUsers = require('../../../data/TestUsers');
 
 var firstUser;
 var mail;
