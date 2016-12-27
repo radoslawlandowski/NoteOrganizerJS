@@ -34,41 +34,34 @@ router.get('/:mail/notes', function(req, res, next) {
 
 router.post('/:mail/tabs', function(req, res, next) {
   res.locals.user.tabs.push(req.body);
-  User.findByIdAndUpdate(req.params.mail, res.locals.user, function (err, post) {
-    if (err) return next(err);
-    res.json(req.body);
-  });
-});
-
-router.put('/:mail/tabs', function(req, res, next) {
-  res.locals.user.tabs.push(req.body);
-  User.findOneAndUpdate({ 'mail': mail }, res.locals.user, function (err, post) {
-    if (err) return next(err);
-    res.json(req.body);
-  });
+  res.locals.user.save();
+  res.json(req.body);
 });
 
 router.post('/:mail/notes', function(req, res, next) {
   res.locals.user.notes.push(req.body);
-  User.findOneAndUpdate({ 'mail': mail }, res.locals.user, function (err, post) {
-    if (err) return next(err);
-    res.json(req.body);
-  });
+  res.locals.user.save();
+  res.json(req.body);
+});
+
+router.put('/:mail/tabs', function(req, res, next) {
+  User.update(
+    { 'tabs._id': req.body._id },
+    { $set: {
+        'tabs.$': req.body
+    }}, function (err, numAffected) { console.log(numAffected); }
+  );
+  res.json(req.body);
 });
 
 router.put('/:mail/notes', function(req, res, next) {
-  res.locals.user.notes.push(req.body);
-  User.findOneAndUpdate({ 'mail': mail }, res.locals.user, function (err, post) {
-    if (err) return next(err);
-    res.json(req.body);
-  });
-});
-
-router.put('/:mail', function(req, res, next) {
-  User.findOneAndUpdate({ 'mail': mail }, req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
+  User.update(
+    { 'notes._id': req.body._id },
+    { $set: {
+        'notes.$': req.body
+    }}, function (err, numAffected) { console.log(numAffected); }
+  );
+  res.json(req.body);
 });
 
 module.exports = router;

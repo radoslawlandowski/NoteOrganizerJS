@@ -28,6 +28,7 @@
     "ng-dialog": "^0.6.4"
   },
   "devDependencies": {
+    "bluebird": "^3.4.7",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "grunt": "^1.0.1",

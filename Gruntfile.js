@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   var environment = grunt.option('environment') || 'development';
 
   var generalTestOptions = {
-    reporter: 'mocha-junit-reporter',
+    reporter: 'spec',
     captureFile: 'test-results.xml',
     quiet: false,
     clearRequireCache: false,

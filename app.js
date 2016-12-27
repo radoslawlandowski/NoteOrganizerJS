@@ -26,8 +26,6 @@ if(process.env.NODE_ENV == "testing") {
 var databaseName = config.dbSettings.db;
 var host = config.dbSettings.host;
 
-console.log(databaseName);
-
 mongoose.Promise = global.Promise;
 
 // view engine setup

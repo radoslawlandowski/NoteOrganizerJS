@@ -12,7 +12,7 @@ var TestUsers = require('../../../data/TestUsers');
 var firstUser;
 var mail;
 
-describe('routes/user.js', () => {
+describe('Integration tests', () => {
 
   before(function() {
     firstUser = TestUsers.completeUser;
@@ -94,5 +94,6 @@ describe('routes/user.js', () => {
       done();
       });
     });
+
   });
 });

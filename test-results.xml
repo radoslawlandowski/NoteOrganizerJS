@@ -1,17 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.1" tests="4" failures="0">
-  <testsuite name="Root Suite" timestamp="2016-12-27T14:16:36" tests="0" failures="0" time="0">
-  </testsuite>
-  <testsuite name="routes/user.js" timestamp="2016-12-27T14:16:36" tests="0" failures="0" time="0">
-  </testsuite>
-  <testsuite name="When GET request" timestamp="2016-12-27T14:16:36" tests="4" failures="0" time="0.1">
-    <testcase name="routes/user.js When GET request without parameters it should get all the users" time="0.048" classname="without parameters it should get all the users">
-    </testcase>
-    <testcase name="routes/user.js When GET request with :id as parameter user&apos;s notes should be correct" time="0.027" classname="with :id as parameter user&apos;s notes should be correct">
-    </testcase>
-    <testcase name="routes/user.js When GET request with :id as parameter user&apos;s notes should be correct" time="0.017" classname="with :id as parameter user&apos;s notes should be correct">
-    </testcase>
-    <testcase name="routes/user.js When GET request with :id as parameter user&apos;s tabs should be correct" time="0.008" classname="with :id as parameter user&apos;s tabs should be correct">
-    </testcase>
-  </testsuite>
-</testsuites>
+
+[0m[0m
+[0m  Note[0m
+  [32m  ✓[0m[90m should be invalid if no title object provided[0m
+  [32m  ✓[0m[90m should be invalid if title string is empty[0m
+  [32m  ✓[0m[90m should be valid if title is correct[0m
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 64
+  [32m  ✓[0m[90m should be invalid if title is too long[0m
+
+
+[92m [0m[32m 4 passing[0m[90m (29ms)[0m
+

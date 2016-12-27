@@ -1,0 +1,21 @@
+{
+  "Settings": {
+    "General": {
+      "maximumNotesNumber": "64",
+      "maximumTabsNumber": "6"
+    },
+    "Users": {
+      "m": ""
+    },
+    "Notes": {
+      "titleMinLength": "1",
+      "titleMaxLength": "64",
+      "contentMinLength": "0",
+      "contentMaxLength": "256"
+    },
+    "Tabs": {
+      "tabNameMinLength": "1",
+      "tabNameMaxLength": "64"
+    }
+  }
+}

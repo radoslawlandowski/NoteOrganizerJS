@@ -1,8 +1,0 @@
-TODO:
-  1. install migrations package # DONE!
-  2. create two databases:
-    -> production
-    -> testing
-  3. create migrations for database schema
-  4. create migations to populate initial data {only testDB}
-  5. make migrations run on every build on jenkins
