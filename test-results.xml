@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.096" tests="4" failures="0">
-  <testsuite name="Root Suite" timestamp="2016-12-27T13:37:46" tests="0" failures="0" time="0">
+<testsuites name="Mocha Tests" time="0.1" tests="4" failures="0">
+  <testsuite name="Root Suite" timestamp="2016-12-27T14:16:36" tests="0" failures="0" time="0">
   </testsuite>
-  <testsuite name="routes/user.js" timestamp="2016-12-27T13:37:46" tests="0" failures="0" time="0">
+  <testsuite name="routes/user.js" timestamp="2016-12-27T14:16:36" tests="0" failures="0" time="0">
   </testsuite>
-  <testsuite name="When GET request" timestamp="2016-12-27T13:37:46" tests="4" failures="0" time="0.096">
+  <testsuite name="When GET request" timestamp="2016-12-27T14:16:36" tests="4" failures="0" time="0.1">
     <testcase name="routes/user.js When GET request without parameters it should get all the users" time="0.048" classname="without parameters it should get all the users">
     </testcase>
-    <testcase name="routes/user.js When GET request with :id as parameter user&apos;s notes should be correct" time="0.025" classname="with :id as parameter user&apos;s notes should be correct">
+    <testcase name="routes/user.js When GET request with :id as parameter user&apos;s notes should be correct" time="0.027" classname="with :id as parameter user&apos;s notes should be correct">
     </testcase>
-    <testcase name="routes/user.js When GET request with :id as parameter user&apos;s notes should be correct" time="0.014" classname="with :id as parameter user&apos;s notes should be correct">
+    <testcase name="routes/user.js When GET request with :id as parameter user&apos;s notes should be correct" time="0.017" classname="with :id as parameter user&apos;s notes should be correct">
     </testcase>
-    <testcase name="routes/user.js When GET request with :id as parameter user&apos;s tabs should be correct" time="0.009" classname="with :id as parameter user&apos;s tabs should be correct">
+    <testcase name="routes/user.js When GET request with :id as parameter user&apos;s tabs should be correct" time="0.008" classname="with :id as parameter user&apos;s tabs should be correct">
     </testcase>
   </testsuite>
 </testsuites>
