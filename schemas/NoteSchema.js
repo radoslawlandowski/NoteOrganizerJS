@@ -7,21 +7,23 @@ var titleMaxLength = notesSettings.titleMaxLength;
 var contentMinLength = notesSettings.contentMinLength;
 var contentMaxLength = notesSettings.contentMaxLength;
 
+var minLengthMessage = config.Messages.minLengthMessage;
+var maxLengthMessage = config.Messages.maxLengthMessage;
+
 var NoteSchema = new mongoose.Schema({
   title: {
     type: String,
-    minlength: titleMinLength,
-    maxlength: titleMaxLength,
+    minlength: [titleMinLength, minLengthMessage],
+    maxlength: [titleMaxLength, maxLengthMessage],
     required: true
   },
   content: {
     type: String,
-    minlength: contentMinLength,
-    maxlength: contentMaxLength,
+    maxlength: [contentMaxLength, maxLengthMessage],
     required: false
   },
   date: {
-    type: Date, 
+    type: Date,
     default: Date.now
   }
 });

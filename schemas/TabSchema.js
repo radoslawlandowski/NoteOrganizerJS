@@ -10,7 +10,11 @@ var generalSettings = config.Settings.General;
 var maximumNotesNumber = generalSettings.maximumNotesNumber;
 
 var TabSchema = new mongoose.Schema({
-  name: {type: String, minLength: tabNameMinLength, maxLength: tabNameMaxLength, required: true},
+  name: {
+    type: String,
+    minLength: tabNameMinLength,
+    maxLength: tabNameMaxLength,
+    required: true},
   notes: {
     type: [NoteSchema],
     validate: {

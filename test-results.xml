@@ -4,7 +4,6 @@
   [32m  ✓[0m[90m should be invalid if no title object provided[0m
   [32m  ✓[0m[90m should be invalid if title string is empty[0m
   [32m  ✓[0m[90m should be valid if title is correct[0m
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 64
   [32m  ✓[0m[90m should be invalid if title is too long[0m
 
 

@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     reporter: 'spec',
     captureFile: 'test-results.xml',
     quiet: false,
-    clearRequireCache: false,
+    clearRequireCache: true,
     noFail: false
   };
 

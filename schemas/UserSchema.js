@@ -6,8 +6,17 @@ var generalSettings = config.Settings.General;
 var maximumTabsNumber = generalSettings.maximumTabsNumber;
 
 var UserSchema = new mongoose.Schema({
-  mail: {type: String, unique: true, minLength: 1, required: true},
-  password: {type: String, minLength: 1, required: true},
+  mail: {
+    type: String,
+    unique: true,
+    minLength: 1,
+    required: true
+  },
+  password: {
+    type: String,
+    minLength: 1, 
+    required: true
+  },
   tabs: {
     type: [TabSchema],
     validate: {

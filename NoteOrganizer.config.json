@@ -8,7 +8,7 @@
       "m": ""
     },
     "Notes": {
-      "titleMinLength": "1",
+      "titleMinLength": "3",
       "titleMaxLength": "64",
       "contentMinLength": "0",
       "contentMaxLength": "256"
@@ -17,5 +17,10 @@
       "tabNameMinLength": "1",
       "tabNameMaxLength": "64"
     }
+  },
+
+  "Messages": {
+    "minLengthMessage": "The value of path `{PATH}` (`{VALUE}`) is shorter than the minimum allowed length ({MINLENGTH}).",
+    "maxLengthMessage": "The value of path `{PATH}` (`{VALUE}`) is longer than the maximum allowed length ({MAXLENGTH})."
   }
 }

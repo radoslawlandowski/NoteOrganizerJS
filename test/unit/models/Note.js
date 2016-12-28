@@ -12,12 +12,29 @@ var Note = require('../../../models/Note.js');
 
 mongoose.Promise = require('bluebird');
 
+/*
+{ [ValidatorError: Path `title` is required.]
+       message: 'Path `title` is required.',
+       name: 'ValidatorError',
+       properties: [Object],
+       kind: 'required',
+       path: 'title',
+       value: undefined }
+       */
+
 describe('Note', function() {
     it('should be invalid if no title object provided', function(done) {
         var n = new Note();
 
         n.validate(function(err) {
-            expect(err.errors.title).to.exist;
+            expect(err == null).to.be.false;
+
+            var te = err.errors.title; //te = titleError
+            expect(te).to.exist;
+            expect(te.message).to.equal("Path `title` is required.");
+            expect(te.kind).to.equal("required");
+            expect(te.path).to.equal("title");
+            expect(te.value).to.equal(undefined);
             done();
         });
     });
@@ -28,7 +45,14 @@ describe('Note', function() {
         var n = new Note({title: title});
 
         n.validate(function(err) {
-            expect(err.errors.title).to.exist;
+            expect(err == null).to.be.false;
+
+            var te = err.errors.title; //te = titleError
+            expect(te).to.exist;
+            expect(te.message).to.equal("Path `title` is required.");
+            expect(te.kind).to.equal("required");
+            expect(te.path).to.equal("title");
+            expect(te.value).to.equal(title);
             done();
         });
     });
@@ -36,6 +60,7 @@ describe('Note', function() {
     it('should be valid if title is correct', function(done) {
         var title = "validTitle";
         expect(title.length >= titleMinLength).to.be.true;
+        expect(title.length <= titleMaxLength).to.be.true;
         var n = new Note({title: title});
 
         n.validate(function(err) {
