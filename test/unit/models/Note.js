@@ -35,12 +35,12 @@ before(function() {
 });
 
 describe('Note', function() {
-    it('should be invalid if no title object provided', function(done) {
+    it('1. Note should be invalid if no title object provided', function(done) {
         var n = new Note();
 
-        var expectedMessage = "Path `title` is required.";
-        var expectedKind = "required";
         var expectedPath = "title";
+        var expectedMessage = "Path `" + expectedPath + "` is required.";
+        var expectedKind = "required";
         var expectedValue = undefined;
 
         n.validate(function(err) {
@@ -53,12 +53,12 @@ describe('Note', function() {
         });
     });
 
-    it('should be invalid if undefined title object provided', function(done) {
+    it('2. Note should be invalid if undefined title object provided', function(done) {
         var n = new Note({title: undefined});
 
-        var expectedMessage = "Path `title` is required.";
-        var expectedKind = "required";
         var expectedPath = "title";
+        var expectedMessage = "Path `" + expectedPath + "` is required.";
+        var expectedKind = "required";
         var expectedValue = undefined;
 
         n.validate(function(err) {
@@ -71,12 +71,12 @@ describe('Note', function() {
         });
     });
 
-    it('should be invalid if title string is empty', function(done) {
+    it('3. Note should be invalid if title string is empty', function(done) {
         var n = new Note({title: emptyTitle});
 
-        var expectedMessage = "Path `title` is required.";
-        var expectedKind = "required";
         var expectedPath = "title";
+        var expectedMessage = "Path `" + expectedPath + "` is required.";
+        var expectedKind = "required";
         var expectedValue = emptyTitle;
 
         n.validate(function(err) {
@@ -89,7 +89,7 @@ describe('Note', function() {
         });
     });
 
-    it('should be invalid if title is too long', function(done) {
+    it('4. Note should be invalid if title is too long', function(done) {
         var n = new Note({title: tooLongTitle});
 
         var expectedKind = "maxlength";
@@ -110,7 +110,7 @@ describe('Note', function() {
         });
     });
 
-    it('should be invalid if content is too long', function(done) {
+    it('5. Note should be invalid if content is too long', function(done) {
         var n = new Note({title: correctTitle, content: tooLongContent});
 
         var expectedKind = "maxlength";
@@ -133,7 +133,7 @@ describe('Note', function() {
 
     /*Note should be vaild */
 
-    it('should be valid if title is correct', function(done) {
+    it('6. Note should be valid if title is correct', function(done) {
         var n = new Note({title: correctTitle});
 
         n.validate(function(err) {
@@ -142,7 +142,7 @@ describe('Note', function() {
         });
     });
 
-    it('should be valid if content is correct', function(done) {
+    it('7. Note should be valid if content is correct', function(done) {
         var n = new Note({title: correctTitle, content:correctContent});
 
         n.validate(function(err) {
@@ -150,7 +150,6 @@ describe('Note', function() {
             done();
         });
     });
-
 });
 
 function verifyNoteErrorProperties(e, message, kind, path, value) {
