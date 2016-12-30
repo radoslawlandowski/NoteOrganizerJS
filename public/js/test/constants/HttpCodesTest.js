@@ -1,7 +1,7 @@
 // define(['angular', 'angularMocks'], function(angular) {
 //
 //     describe('HttpCodes:', function() {
-//         beforeEach(angular.mock.module('tdpInvestModule'));
+//         beforeEach(angular.mock.module('NoteOrganizerModule'));
 //
 //         var HttpCodes;
 //         beforeEach(inject(function(_HttpCodes_){

@@ -1,7 +1,7 @@
 define(['angular', 'angularMocks', 'application/filters/NoteByTabFilter'], function(angular) {
 
     describe('NoteByTabFilter', function() {
-        beforeEach(angular.mock.module('tdpInvestModule'));
+        beforeEach(angular.mock.module('NoteOrganizerModule'));
 
         var $filter;
         beforeEach(inject(function(_$filter_){
@@ -71,13 +71,6 @@ define(['angular', 'angularMocks', 'application/filters/NoteByTabFilter'], funct
                     expect(output).not.toBeNull();
                     expect(output.length).toEqual(tab.countOfNotes);
                 });
-            });
-
-            it('an array being 2 in length', function() {
-                var output = $filter('NoteByTabFilter')(input, nullTab.name);
-                expect(output).toBeDefined();
-                expect(output).not.toBeNull();
-                expect(output.length).toEqual(nullTab.countOfNotes);
             });
         });
 

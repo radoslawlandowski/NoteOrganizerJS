@@ -1,7 +1,7 @@
 // define(['angular', 'angularMocks', 'application/services/NoteService', 'application/constants/UrlPaths', 'application/factories/NoteFactory'], function(angular) {
 //
 //     describe('NoteService', function() {
-//         beforeEach(angular.mock.module('tdpInvestModule'));
+//         beforeEach(angular.mock.module('NoteOrganizerModule'));
 //
 //         var noteService, urlPaths, $httpBackend, noteFactory, iShouldNeverBeInvoked;
 //         beforeEach(inject(function(_NoteService_, _UrlPaths_, _$httpBackend_, _NoteFactory_) {

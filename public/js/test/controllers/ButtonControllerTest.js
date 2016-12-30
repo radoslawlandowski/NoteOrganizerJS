@@ -1,7 +1,7 @@
 define(['angular', 'angularMocks', 'application/controllers/ButtonController'], function(angular) {
 
     describe('ButtonController:', function() {
-        beforeEach(angular.mock.module('tdpInvestModule'));
+        beforeEach(angular.mock.module('NoteOrganizerModule'));
 
         var $controller, $state, buttonController;
         beforeEach(inject(function(_$controller_, _$state_){

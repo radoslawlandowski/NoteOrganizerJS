@@ -1,7 +1,7 @@
 define(['angular', 'angularMocks', 'application/services/TabService', 'application/constants/UrlPaths', 'application/constants/HttpCodes', 'application/constants/NotificationMessages'], function (angular) {
 
     describe('TabService:', function () {
-        beforeEach(angular.mock.module('tdpInvestModule'));
+        beforeEach(angular.mock.module('NoteOrganizerModule'));
 
         var $httpBackend, $rootScope;
         var TabService;

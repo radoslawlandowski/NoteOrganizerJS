@@ -1,7 +1,7 @@
 define(['angular', 'angularMocks', 'application/constants/UrlPaths'], function(angular) {
 
     describe('UrlPaths', function() {
-        beforeEach(angular.mock.module('tdpInvestModule'));
+        beforeEach(angular.mock.module('NoteOrganizerModule'));
 
         var urlPaths;
         beforeEach(inject(function(_UrlPaths_){
