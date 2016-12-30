@@ -17,7 +17,7 @@ define(['angular'
                 abstract: true,
                 views: {
                     "@": {
-                        templateUrl: "html/partials/tdp-invest-main.html"
+                        templateUrl: "html/partials/NoteOrganizerMain.html"
                     }
                 },
                 resolve: {
