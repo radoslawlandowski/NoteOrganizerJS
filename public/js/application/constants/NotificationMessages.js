@@ -15,7 +15,7 @@ define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOr
         TAB_DELETION_FAILED: {
             content: "The deletion could not be performed!",
             type: "notificationError"
-        }
+        },
         TAB_TITLE_UNDEFINED: {
             content: "The tab's title cannot be empty!",
             type: "notificationWarning"

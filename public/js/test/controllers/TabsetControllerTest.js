@@ -1,7 +1,7 @@
 // define(['angular', 'angularMocks', 'application/controllers/TabsetController', 'application/services/NoteService', 'application/services/TabService'], function(angular) {
 //
 //     describe('TabsetController:', function() {
-//         beforeEach(angular.mock.module('tdpInvestModule'));
+//         beforeEach(angular.mock.module('NoteOrganizerModule'));
 //
 //         var $controller, $state, noteService, q, tabsetController, deferred, tabService;
 //         beforeEach(inject(function(_$controller_, _$state_, _NoteService_, _TabService_, _DefaultTabs_, $q, _$rootScope_){

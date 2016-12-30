@@ -1,5 +1,5 @@
-var allTestFiles = [];
-var TEST_REGEXP = /(spec|test)\.js$/i;
+var allTestFiles = []
+var TEST_REGEXP = /(spec|test)\.js$/i
 
 // Get a list of all the test files to include
 Object.keys(window.__karma__.files).forEach(function (file) {
@@ -7,14 +7,15 @@ Object.keys(window.__karma__.files).forEach(function (file) {
     // Normalize paths to RequireJS module names.
     // If you require sub-dependencies of test files to be loaded as-is (requiring file extension)
     // then do not normalize the paths
-    var normalizedTestModule = file.replace(/^\/base\/|\.js$/g, '');
+    var normalizedTestModule = file.replace(/^\/base\/|\.js$/g, '')
     allTestFiles.push(normalizedTestModule)
   }
-});
+})
 
 require.config({
   // Karma serves files under /base, which is the basePath from your config file
-  baseUrl: '/base',
+  baseUrl: '/base/',
+
   paths: {
       'angular': 'lib/angular/angular',
       'angularMocks': 'lib/angular-mocks/angular-mocks',
@@ -24,7 +25,7 @@ require.config({
       'karma-requireJS': 'lib/karma-require',
       'uiBootstrap': 'lib/angular-bootstrap/ui-bootstrap',
       'uiBootstrapTemplates' : 'lib/angular-bootstrap/ui-bootstrap-tpls',
-      'ngAnimate': 'lib/angular-animate/angular-animate.min',
+    //  'ngAnimate': 'lib/angular-animate/angular-animate.min',
       'angular-filter': 'lib/angular-filter/dist/angular-filter.min',
       'ng-dialog' : 'lib/ng-dialog/js/ngDialog',
       'angular-growl-notifications': 'lib/angular-growl-notifications/dist/angular-growl-notifications',
@@ -43,9 +44,9 @@ require.config({
       'uiBootstrapTemplates' : {
           deps: ['angular']
       },
-      'ngAnimate' : {
-          deps: ['angular']
-      },
+  //    'ngAnimate' : {
+    //      deps: ['angular']
+  //    },
       'angular-filter' : {
           deps: ['angular']
       },
@@ -65,4 +66,4 @@ require.config({
 
   // we have to kickoff jasmine, as it is asynchronous
   callback: window.__karma__.start
-});
+})

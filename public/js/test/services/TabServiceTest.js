@@ -1,7 +1,7 @@
 define(['angular', 'angularMocks', 'application/services/TabService', 'application/constants/UrlPaths', 'application/constants/HttpCodes', 'application/constants/NotificationMessages'], function (angular) {
 
     describe('TabService:', function () {
-        beforeEach(angular.mock.module('tdpInvestModule'));
+        beforeEach(angular.mock.module('NoteOrganizerModule'));
 
         var $httpBackend, $rootScope;
         var TabService;
@@ -38,7 +38,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
             it('200 from backend and valid data, it should return an array of tabs', function () {
                 var expectedTabs = tabs;
 
-                $httpBackend.expectGET(UrlPaths.tabs.all).respond(HttpCodes.OK.code, expectedTabs);
+                $httpBackend.expectGET(UrlPaths.tabs).respond(HttpCodes.OK.code, expectedTabs);
 
                 var achievedTabs = [];
                 TabService.all().then(function (response) {
@@ -55,7 +55,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
             it('200 from backend and one-element data it should return a one-element array', function () {
                 var expectedTabs = [tabs[0]];
 
-                $httpBackend.expectGET(UrlPaths.tabs.all).respond(HttpCodes.OK.code, expectedTabs);
+                $httpBackend.expectGET(UrlPaths.tabs).respond(HttpCodes.OK.code, expectedTabs);
 
                 var achievedTabs = [];
                 TabService.all().then(function (response) {
@@ -72,7 +72,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
             it('204 from backend with an empty array it should return an empty array', function () {
                 var expectedTabs = [];
 
-                $httpBackend.expectGET(UrlPaths.tabs.all).respond(HttpCodes.OK.code, expectedTabs);
+                $httpBackend.expectGET(UrlPaths.tabs).respond(HttpCodes.OK.code, expectedTabs);
 
                 var achievedTabs = [];
                 TabService.all().then(function (response) {
@@ -89,7 +89,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
             it('500 from backend it should return a message', function () {
                 var expectedMessage = NotificationMessages.ANY_OTHER_FAILURE + HttpCodes.INTERNAL_SERVER_ERROR.code;
 
-                $httpBackend.expectGET(UrlPaths.tabs.all).respond(HttpCodes.INTERNAL_SERVER_ERROR.code);
+                $httpBackend.expectGET(UrlPaths.tabs).respond(HttpCodes.INTERNAL_SERVER_ERROR.code);
 
                 var achievedMessage = "";
                 TabService.all().then(function () {
@@ -160,7 +160,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
                 var expectedObject = {tab: expectedTab, message: expectedMessage};
                 var accuiredObject = {};
 
-                $httpBackend.expectPUT(UrlPaths.tabs.create, preparedTab).respond(HttpCodes.CREATED.code, expectedTab);
+                $httpBackend.expectPUT(UrlPaths.tabs, preparedTab).respond(HttpCodes.CREATED.code, expectedTab);
 
                 TabService.create(tabs, tabTitle).then(function (response) {
                     accuiredObject = response;
@@ -183,7 +183,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
                 };
 
                 angular.forEach(otherStatusFailureCodes, function (code) {
-                    $httpBackend.expectPUT(UrlPaths.tabs.create, preparedTab).respond(code);
+                    $httpBackend.expectPUT(UrlPaths.tabs, preparedTab).respond(code);
 
                     var achievedMessage = "";
                     TabService.create(tabs, anyName).then(function () {
