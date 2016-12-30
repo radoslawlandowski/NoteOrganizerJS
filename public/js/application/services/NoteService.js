@@ -54,10 +54,6 @@ define(['angular', 'application/NoteOrganizerModule', 'application/constants/Htt
           return !angular.isUndefined(note.title);
         };
 
-        function setDate(note) {
-            note.date = new Date();
-        };
-
         function generalError(statusCode) {
             return $q.reject(NotificationMessages.ANY_OTHER_FAILURE + "HttpCode: " + statusCode);
         };

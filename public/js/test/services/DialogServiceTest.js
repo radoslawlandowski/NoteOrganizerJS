@@ -23,18 +23,18 @@ define(['angular', 'angularMocks', 'application/services/DialogService', 'applic
             DialogMessages = _DialogMessages_;
             mockNgDialog = ngDialog;
             $scope = _$rootScope_.$new();
-            
+
             expected  = {
                 template: 'html/partials/parametrizedDialog.html',
                 className: 'ngdialog-theme-default',
                 scope: $scope
-            },
+            };
 
             dialogMethods = [
-              { method: DialogService.getDeleteDialog, message: DialogMessages.TAB_DELETION},
-              { method: DialogService.getDeleteNoteDialog, message: DialogMessages.NOTE_DELETION},
-              { method: DialogService.getNewTabDialog, message: DialogMessages.TAB_CREATION},
-              { method: DialogService.getNoTabsDialog, message: DialogMessages.NO_TABS_AVAILABLE}
+              { method: DialogService.getDeleteDialog, message: DialogMessages.TAB_DELETION },
+              { method: DialogService.getDeleteNoteDialog, message: DialogMessages.NOTE_DELETION },
+              { method: DialogService.getNewTabDialog, message: DialogMessages.TAB_CREATION },
+              { method: DialogService.getNoTabsDialog, message: DialogMessages.NO_TABS_AVAILABLE }
             ];
 
         }));
