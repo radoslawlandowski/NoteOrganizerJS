@@ -1,4 +1,4 @@
-define(['angular', 'application/NoteOrganizerModule', 'application/constants/HttpCodes'], function(angular, NoteOrganizerModule) {
+define(['angular', 'application/NoteOrganizerModule', 'application/constants/DialogMessages'], function(angular, NoteOrganizerModule) {
     NoteOrganizerModule.service("DialogService", function($rootScope, DialogMessages, ngDialog) {
 
         function getDialog(content) {

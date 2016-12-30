@@ -49,7 +49,7 @@ define(['angular', 'application/NoteOrganizerModule'], function(angular, NoteOrg
         function doesTabExist(tabs, tabTitle) {
             var result = false;
             angular.forEach(tabs, function(tab) {
-                if(tab.name === tabTitle) {
+                if(tab === tabTitle) {
                     result = true;
                     return;
                 };

@@ -27,12 +27,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
             expect(iShouldNeverBeInvoked.calls.any()).toEqual(false);
         });
 
-        var tabs = [
-            {"id": 1, "name": "First"},
-            {"id": 2, "name": "Second"},
-            {"id": 3, "name": "Third"},
-            {"id": 4, "name": "Fourth"}
-        ];
+        var tabs = ["First", "Second", "Third", "Fourth"];
 
         describe('When getting all notes and returning', function () {
             it('200 from backend and valid data, it should return an array of tabs', function () {
@@ -69,23 +64,6 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
                 expect(achievedTabs).toEqual(expectedTabs);
             });
 
-            it('204 from backend with an empty array it should return an empty array', function () {
-                var expectedTabs = [];
-
-                $httpBackend.expectGET(UrlPaths.tabs).respond(HttpCodes.OK.code, expectedTabs);
-
-                var achievedTabs = [];
-                TabService.all().then(function (response) {
-                    achievedTabs = response;
-                }, function () {
-                    iShouldNeverBeInvoked();
-                });
-
-                $httpBackend.flush();
-
-                expect(achievedTabs).toEqual(expectedTabs);
-            });
-
             it('500 from backend it should return a message', function () {
                 var expectedMessage = NotificationMessages.ANY_OTHER_FAILURE + HttpCodes.INTERNAL_SERVER_ERROR.code;
 
@@ -106,7 +84,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
 
         describe('When trying to create an already existing tab"', function () {
             it('it should reject the promise with a proper message', function () {
-                var newTabName = tabs[0].name;
+                var newTabName = tabs[0];
 
                 var expectedMessage = NotificationMessages.TAB_ALREADY_EXISTS;
 
@@ -150,17 +128,14 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
                     "name": tabTitle
                 };
 
-                var expectedTab = {
-                    "id": 1,
-                    "name": tabTitle
-                };
+                var expectedTab = tabTitle;
 
                 var expectedMessage = NotificationMessages.TAB_CREATED;
 
                 var expectedObject = {tab: expectedTab, message: expectedMessage};
                 var accuiredObject = {};
 
-                $httpBackend.expectPUT(UrlPaths.tabs, preparedTab).respond(HttpCodes.CREATED.code, expectedTab);
+                $httpBackend.expectPOST(UrlPaths.tabs, preparedTab).respond(HttpCodes.CREATED.code, expectedTab);
 
                 TabService.create(tabs, tabTitle).then(function (response) {
                     accuiredObject = response;
@@ -183,7 +158,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
                 };
 
                 angular.forEach(otherStatusFailureCodes, function (code) {
-                    $httpBackend.expectPUT(UrlPaths.tabs, preparedTab).respond(code);
+                    $httpBackend.expectPOST(UrlPaths.tabs, preparedTab).respond(code);
 
                     var achievedMessage = "";
                     TabService.create(tabs, anyName).then(function () {
