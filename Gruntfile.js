@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   var environment = grunt.option('environment') || 'development';
 
   var generalTestOptions = {
-    reporter: 'spec',
+    reporter: grunt.option('testReporter') || 'spec',
     captureFile: 'test-results.xml',
     quiet: false,
     clearRequireCache: true,
