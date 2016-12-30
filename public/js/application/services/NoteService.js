@@ -11,22 +11,32 @@ define(['angular', 'application/NoteOrganizerModule', 'application/constants/Htt
             });
         };
 
+        service.send = function(note) {
+          if(angular.isDefined(note._id)) {
+            return this.edit(note);
+          } else {
+            return this.create(note);
+          };
+        };
+
         service.edit = function(note) {
-            
-        }
+            if(!isTitleDefined(note)) {
+              return $q.reject(NotificationMessages.NOTE_TITLE_UNDEFINED);
+            };
+            return $http.put(UrlPaths.notes, note).then(function(response) {
+                return {note: response.data, message: NotificationMessages.NOTE_EDITED};
+            }, function(failure) {
+                return generalError(failure.status);
+            });
+        };
 
         service.create = function(note) {
-            if(angular.isUndefined(note.title)) {
+            if(!isTitleDefined(note)) {
                 return $q.reject(NotificationMessages.NOTE_TITLE_UNDEFINED);
-            }
-            setDate(note);
+            };
 
             return $http.post(UrlPaths.notes, note).then(function(response) {
-                 if(angular.isUndefined(note._id)) {
-                     return {note: response.data, message: NotificationMessages.NOTE_CREATED};
-                 } else {
-                     return {note: response.data, message: NotificationMessages.NOTE_EDITED};
-                 };
+                return {note: response.data, message: NotificationMessages.NOTE_CREATED};
             }, function(failure) {
                 return generalError(failure.status);
             });
@@ -38,6 +48,10 @@ define(['angular', 'application/NoteOrganizerModule', 'application/constants/Htt
             }, function(failure) {
                 return generalError(failure.status);
             });
+        };
+
+        function isTitleDefined(note) {
+          return !angular.isUndefined(note.title);
         };
 
         function setDate(note) {

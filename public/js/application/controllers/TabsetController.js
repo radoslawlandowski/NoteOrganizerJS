@@ -6,7 +6,7 @@ define(['angular', 'application/NoteOrganizerModule', 'application/services/TabS
         init();
 
         vm.sendNote = function (note) {
-            NoteService.create(note).then(function (response) {
+            NoteService.send(note).then(function (response) {
                 $scope.notes = $filter('filter')($scope.notes, function (value) {
                     return value._id !== response.note._id;
                 });

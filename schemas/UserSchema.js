@@ -66,6 +66,7 @@ UserSchema.statics.addNote = function (note, user, callback) {
 }
 
 UserSchema.statics.editNote = function (editedNote, user, callback) {
+  editedNote.date = Date.now();
   return this.findOneAndUpdate({'mail': user.mail, 'notes._id': editedNote._id},
     {$set: {'notes.$': editedNote}}, {new: true, runValidators: true}, callback);
 }
