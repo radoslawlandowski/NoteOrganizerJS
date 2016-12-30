@@ -65,7 +65,7 @@ describe('Integration tests', () => {
     it('When posting tab already inside database it should return proper info', (done) => {
       var tab = firstUser.tabs[0];
       var requestUrl = '/api/users/' + mail + '/tabs';
-      var expectedResponse = { ok: 1, nModified: 0, n: 0 };
+      var expectedResponse = {};
       chai.request(server)
           .post(requestUrl)
           .send({name: tab})
