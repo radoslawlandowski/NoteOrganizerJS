@@ -11,6 +11,10 @@ define(['angular', 'application/NoteOrganizerModule', 'application/constants/Htt
             });
         };
 
+        service.edit = function(note) {
+            
+        }
+
         service.create = function(note) {
             if(angular.isUndefined(note.title)) {
                 return $q.reject(NotificationMessages.NOTE_TITLE_UNDEFINED);

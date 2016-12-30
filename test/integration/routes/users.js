@@ -9,14 +9,21 @@ var User = require('../../../models/User.js');
 var TestHelper = require('../../TestHelper');
 var TestUsers = require('../../../data/TestUsers');
 
+var config = require("../../../NoteOrganizer.config.json");
+
 var firstUser;
+var noTabsAndNotesUser;
 var mail;
 
-describe('Integration tests', () => {
+var maximumTabsNumber = config.Settings.General.maximumTabsNumber;
+
+describe('Integration tests:', () => {
 
   before(function() {
     firstUser = TestUsers.completeUser;
     mail = firstUser.mail;
+
+    noTabsAndNotesUser = TestUsers.noTabsAndNotesUser;
 
     TestHelper.clearCollection();
     TestHelper.populateCollection();
@@ -62,19 +69,49 @@ describe('Integration tests', () => {
           });
     });
 
-    it('When posting tab already inside database it should return proper info', (done) => {
+    it('When posting tab already inside database it should return 409 status code', (done) => {
       var tab = firstUser.tabs[0];
       var requestUrl = '/api/users/' + mail + '/tabs';
-      var expectedResponse = {};
+
       chai.request(server)
           .post(requestUrl)
           .send({name: tab})
           .end((err, res) => {
-            console.log(res.body);
-              res.body.should.deep.equal(expectedResponse);
+              res.status.should.equal(409);
               done();
       });
     });
 
+    it('When posting valid tab it should return this tab', (done) => {
+      var tab = firstUser.tabs[0] + "UNIQUE";
+      var requestUrl = '/api/users/' + mail + '/tabs';
+
+      chai.request(server)
+          .post(requestUrl)
+          .send({name: tab})
+          .end((err, res) => {
+              res.status.should.equal(200);
+              res.body.should.equal(tab);
+              done();
+            });
+    });
+
+
+    it('When posting valid note it should return this note with _id', (done) => {
+      var requestUrl = '/api/users/' + mail + '/notes';
+      var validNote = TestHelper.getValidNote();
+
+      chai.request(server)
+          .post(requestUrl)
+          .send(validNote)
+          .end((err, res) => {
+              res.status.should.equal(200);
+              res.body.should.have.property("_id");
+              res.body.title.should.equal(validNote.title);
+              res.body.content.should.equal(validNote.content);
+              res.body.tab.should.equal(validNote.tab);
+              done();
+            });
+    });
   });
 });

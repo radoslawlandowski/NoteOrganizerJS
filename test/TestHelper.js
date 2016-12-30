@@ -12,6 +12,8 @@ var titleMaxLength = Number(notesSettings.titleMaxLength);
 var contentMinLength = Number(notesSettings.contentMinLength);
 var contentMaxLength = Number(notesSettings.contentMaxLength);
 
+var tabNameMaxLength = Number(config.Settings.Tabs.tabNameMaxLength);
+
 var maxLengthMessage = config.Messages.maxLengthMessage;
 var minLengthMessage = config.Messages.minLengthMessage;
 
@@ -56,7 +58,11 @@ var getValidUser = function() {
   var validMail = "valid@mail.com";
   var validPassword = "validPassword";
   return new User({mail: validMail, password: validPassword, notes: [validNote]});
-}
+};
+
+var getValidTab = function() {
+  return generateString(tabNameMaxLength - 3);
+};
 
 function verifyError(e, message, kind, path, value) {
   expect(e).to.exist;
@@ -78,3 +84,4 @@ function generateString(count) {
 module.exports.populateCollection = populateCollection;
 module.exports.clearCollection = clearCollection;
 module.exports.getValidNote = getValidNote;
+module.exports.getValidTab = getValidTab;

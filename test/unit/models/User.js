@@ -12,8 +12,11 @@ var tabsSettings = config.Settings.Tabs;
 var tabNameMinLength = Number(tabsSettings.tabNameMinLength);
 var tabNameMaxLength = Number(tabsSettings.tabNameMaxLength);
 
+
 var generalSettings = config.Settings.General;
 var maximumNotesNumber = Number(generalSettings.maximumNotesNumber);
+var maximumTabsNumber = Number(generalSettings.maximumTabsNumber);
+
 var maxNoteNumberMessage = config.Messages.maxNoteNumberMessage;
 maxNoteNumberMessage = maxNoteNumberMessage.replace("{VALUE}", maximumNotesNumber);
 
@@ -77,6 +80,33 @@ describe('User', function() {
 
     u.validate(function(err) {
       expect(err).to.not.exist;
+      done();
+    });
+  });
+
+  it('5. User should be valid if maximum number of tabs is not exceeded', function(done) {
+    var notTooManyTabs = [];
+    for(var i = 0 ; i < maximumTabsNumber ; i++) {
+      notTooManyTabs.push(TestHelper.getValidTab());
+    };
+    var u = new User({mail: validMail, password: validPassword, tabs: notTooManyTabs});
+
+    u.validate(function(err) {
+      expect(err).to.not.exist;
+      done();
+    });
+  });
+
+
+  it('6. User should be invalid if maximum number of tabs has exceeded', function(done) {
+    var tooManyTabs = [];
+    for(var i = 0 ; i < maximumTabsNumber + 3 ; i++) {
+      tooManyTabs.push(TestHelper.getValidTab());
+    };
+    var u = new User({mail: validMail, password: validPassword, tabs: tooManyTabs});
+
+    u.validate(function(err) {
+      expect(err).to.exist;
       done();
     });
   });

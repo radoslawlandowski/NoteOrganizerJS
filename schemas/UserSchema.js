@@ -28,6 +28,7 @@ var UserSchema = new mongoose.Schema({
     }],
     validate: {
       validator: function(t) {
+        console.log("ENTERED TAB VALIDATOR: " + t.length);
         return t.length <= maximumTabsNumber;
       },
       message: maxTabNumberMessage
@@ -47,11 +48,13 @@ var UserSchema = new mongoose.Schema({
 UserSchema.index({ mail: 1, 'tabs': 1}, { unique: true });
 
 UserSchema.statics.addTab = function (tab, user, callback) {
-  return this.findOneAndUpdate(
-    { 'mail': user.mail, 'tabs': { $ne: tab } },
-    { $push: {'tabs': tab } },
-    { new: true, runValidators: true },
-    callback);
+  this.findOne({ 'mail' : user.mail, 'tabs': {$ne: tab} }, function(err, user) {
+    if(user != null) {
+      user.tabs.push(tab);
+      user.save(callback);
+    }
+    callback(err, user);
+  });
 };
 
 UserSchema.statics.removeTab = function(tab, user, callback) {
