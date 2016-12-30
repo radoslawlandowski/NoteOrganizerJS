@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-mongoose.set('debug', true)
 
 var User = require("../models/User.js");
 var Note = require("../models/Note.js");
