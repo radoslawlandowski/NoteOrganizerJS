@@ -32,11 +32,11 @@ define(['angular'
                 }
             },
             resolve: {
-                notes: function(NoteService) {
-                    return NoteService.all();
-                },
                 tabs: function(TabService) {
                     return TabService.all();
+                },
+                notes: function(NoteService) {
+                    return NoteService.all();
                 },
                 buttonTitle: function() {
                     return 'New';

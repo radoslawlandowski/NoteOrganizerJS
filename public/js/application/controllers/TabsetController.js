@@ -8,7 +8,7 @@ define(['angular', 'application/NoteOrganizerModule', 'application/services/TabS
         vm.sendNote = function (note) {
             NoteService.create(note).then(function (response) {
                 $scope.notes = $filter('filter')($scope.notes, function (value) {
-                    return value.id !== response.note.id;
+                    return value._id !== response.note._id;
                 });
                 $scope.notes.push(response.note);
                 $state.go("tdp.notes");
@@ -22,7 +22,7 @@ define(['angular', 'application/NoteOrganizerModule', 'application/services/TabS
             DialogService.getDeleteNoteDialog().then(function () {
                 NoteService.delete(note).then(function (response) {
                     $scope.notes = $filter('filter')($scope.notes, function (value) {
-                        return value.id !== response.note.id;
+                        return value._id !== response.noteId;
                     });
                     $state.go("tdp.notes");
                     notify(response.message);
@@ -47,7 +47,7 @@ define(['angular', 'application/NoteOrganizerModule', 'application/services/TabS
             DialogService.getDeleteDialog().then(function () {
                 TabService.delete(tab).then(function (response) {
                     $scope.tabs = $filter('filter')($scope.tabs, function (value) {
-                        return value.id !== tab.id;
+                        return value !== tab;
                     });
                     vm.activeTab = vm.defaultActiveTab;
                     notify(response);

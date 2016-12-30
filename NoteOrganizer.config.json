@@ -1,26 +1,29 @@
 {
   "Settings": {
     "General": {
-      "maximumNotesNumber": "64",
-      "maximumTabsNumber": "6"
+      "maximumNotesNumber": "16",
+      "maximumTabsNumber": "6",
+      "defaultTabName": "Main"
     },
     "Users": {
       "m": ""
     },
     "Notes": {
-      "titleMinLength": "3",
+      "titleMinLength": "2",
       "titleMaxLength": "64",
       "contentMinLength": "0",
       "contentMaxLength": "256"
     },
     "Tabs": {
-      "tabNameMinLength": "1",
-      "tabNameMaxLength": "64"
+      "tabNameMinLength": "2",
+      "tabNameMaxLength": "36"
     }
   },
 
   "Messages": {
     "minLengthMessage": "The value of path `{PATH}` (`{VALUE}`) is shorter than the minimum allowed length ({MINLENGTH}).",
-    "maxLengthMessage": "The value of path `{PATH}` (`{VALUE}`) is longer than the maximum allowed length ({MAXLENGTH})."
+    "maxLengthMessage": "The value of path `{PATH}` (`{VALUE}`) is longer than the maximum allowed length ({MAXLENGTH}).",
+    "maxNoteNumberMessage" : "You cannot have more than `{VALUE}` notes!",
+    "maxTabNumberMessage": "You cannot have more than `{VALUE}` tabs!"
   }
 }

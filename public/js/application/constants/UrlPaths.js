@@ -2,13 +2,12 @@ define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOr
     NoteOrganizerModule.constant("UrlPaths", {
         notes: {
             all:  "/api/users/userMailOne/notes",
-            byId: "/api/users/userMailOne/notes",
             create: "/api/users/userMailOne/notes",
-            delete: "/api/users/userMailOne/notes"
+            delete: "/api/users/userMailOne/notes",
+            edit: "/api/users/userMailOne/notes",
         },
         tabs: {
             all:  "/api/users/userMailOne/tabs",
-            byId: "/api/users/userMailOne/tabs",
             create: "/api/users/userMailOne/tabs",
             delete: "/api/users/userMailOne/tabs"
         }

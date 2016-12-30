@@ -2,39 +2,35 @@ var User = require('../models/User');
 var Note = require('../models/Note');
 var Tab = require('../models/Tab');
 
-var tabOne = new Tab({name: "tabOne"});
-var tabTwo = new Tab({name: "tabTwo"});
-var tabThree = new Tab({name: "tabThree"});
-
 var noteOne = new Note({
   title: "noteTitleOne",
   content: "noteContentOne",
-  tab: "noteTabOne"
+  tab: "one"
 });
 
 var noteTwo = new Note({
   title: "noteTitleTwo",
   content: "noteContentTwo",
-  tab: "noteTabTwo"
+  tab: "one"
 });
 
 var noteThree = new Note({
   title: "noteTitleThree",
   content: "noteContentThree",
-  tab: "noteTabThree"
+  tab: "one"
 });
 
 var completeUser = new User({
   mail: "userMailOne",
   password: "userPasswordOne",
-  tabs: [tabOne, tabTwo, tabThree],
+  tabs: ["one", "two"],
   notes: [noteOne, noteTwo, noteThree]
 });
 
 var noNotesUser = new User({
   mail: "userMailTwo",
   password: "userPasswordTwo",
-  tabs: [tabOne, tabTwo, tabThree],
+  tabs: ["one", "two", "three"],
   notes: []
 });
 

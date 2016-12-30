@@ -5,26 +5,26 @@ var Note = require('../../../models/Note.js');
 mongoose.Promise = require('bluebird');
 
 var notesSettings = config.Settings.Notes;
-var titleMinLength = notesSettings.titleMinLength;
-var titleMaxLength = notesSettings.titleMaxLength;
-var contentMinLength = notesSettings.contentMinLength;
-var contentMaxLength = notesSettings.contentMaxLength;
+var titleMinLength = Number(notesSettings.titleMinLength);
+var titleMaxLength = Number(notesSettings.titleMaxLength);
+var contentMinLength = Number(notesSettings.contentMinLength);
+var contentMaxLength = Number(notesSettings.contentMaxLength);
 
 var maxLengthMessage = config.Messages.maxLengthMessage;
 var minLengthMessage = config.Messages.minLengthMessage;
 
+var defaultTabName = config.Settings.General.defaultTabName;
+
 var emptyTitle, tooShortTitle, tooLongTitle, correctTitle;
 var correctContent, tooLongContent;
 
-var justChar = 'a';
-
 before(function() {
-  emptyTitle = generateString(0, justChar);
-  tooShortTitle = generateString(titleMinLength - 1, justChar);
-  correctTitle = generateString(titleMinLength + 1, justChar);
-  tooLongTitle = generateString(titleMaxLength + 1, justChar);
-  correctContent = generateString(contentMinLength + 1, justChar);
-  tooLongContent = generateString(contentMaxLength + 1, justChar);
+  emptyTitle = generateString(0);
+  tooShortTitle = generateString(titleMinLength - 1);
+  correctTitle = generateString(titleMinLength + 1);
+  tooLongTitle = generateString(titleMaxLength + 1);
+  correctContent = generateString(contentMinLength + 1);
+  tooLongContent = generateString(contentMaxLength + 1);
 
   expect(emptyTitle.length < titleMinLength).to.be.true;
   expect(tooShortTitle.length < titleMinLength).to.be.true;
@@ -44,34 +44,16 @@ describe('Note', function() {
         var expectedValue = undefined;
 
         n.validate(function(err) {
-            verifyNoteErrorProperties(err.errors.title,
-                                        expectedMessage,
-                                        expectedKind,
-                                        expectedPath,
-                                        expectedValue);
+            verifyError(err.errors.title,
+                        expectedMessage,
+                        expectedKind,
+                        expectedPath,
+                        expectedValue);
             done();
         });
     });
 
-    it('2. Note should be invalid if undefined title object provided', function(done) {
-        var n = new Note({title: undefined});
-
-        var expectedPath = "title";
-        var expectedMessage = "Path `" + expectedPath + "` is required.";
-        var expectedKind = "required";
-        var expectedValue = undefined;
-
-        n.validate(function(err) {
-          verifyNoteErrorProperties(err.errors.title,
-                                      expectedMessage,
-                                      expectedKind,
-                                      expectedPath,
-                                      expectedValue);
-          done();
-        });
-    });
-
-    it('3. Note should be invalid if title string is empty', function(done) {
+    it('2. Note should be invalid if title string is empty', function(done) {
         var n = new Note({title: emptyTitle});
 
         var expectedPath = "title";
@@ -80,16 +62,16 @@ describe('Note', function() {
         var expectedValue = emptyTitle;
 
         n.validate(function(err) {
-          verifyNoteErrorProperties(err.errors.title,
-                                      expectedMessage,
-                                      expectedKind,
-                                      expectedPath,
-                                      expectedValue);
+          verifyError(err.errors.title,
+                      expectedMessage,
+                      expectedKind,
+                      expectedPath,
+                      expectedValue);
           done();
         });
     });
 
-    it('4. Note should be invalid if title is too long', function(done) {
+    it('3. Note should be invalid if title is too long', function(done) {
         var n = new Note({title: tooLongTitle});
 
         var expectedKind = "maxlength";
@@ -101,16 +83,16 @@ describe('Note', function() {
                                 .replace("{MAXLENGTH}", titleMaxLength);
 
         n.validate(function(err) {
-          verifyNoteErrorProperties(err.errors.title,
-                                      expectedMessage,
-                                      expectedKind,
-                                      expectedPath,
-                                      expectedValue);
+          verifyError(err.errors.title,
+                      expectedMessage,
+                      expectedKind,
+                      expectedPath,
+                      expectedValue);
           done();
         });
     });
 
-    it('5. Note should be invalid if content is too long', function(done) {
+    it('4. Note should be invalid if content is too long', function(done) {
         var n = new Note({title: correctTitle, content: tooLongContent});
 
         var expectedKind = "maxlength";
@@ -122,18 +104,18 @@ describe('Note', function() {
                                 .replace("{MAXLENGTH}", contentMaxLength);
 
         n.validate(function(err) {
-          verifyNoteErrorProperties(err.errors.content,
-                                      expectedMessage,
-                                      expectedKind,
-                                      expectedPath,
-                                      expectedValue);
+          verifyError(err.errors.content,
+                      expectedMessage,
+                      expectedKind,
+                      expectedPath,
+                      expectedValue);
           done();
         });
     });
 
     /*Note should be vaild */
 
-    it('6. Note should be valid if title is correct', function(done) {
+    it('5. Note should be valid if title is correct', function(done) {
         var n = new Note({title: correctTitle});
 
         n.validate(function(err) {
@@ -142,7 +124,7 @@ describe('Note', function() {
         });
     });
 
-    it('7. Note should be valid if content is correct', function(done) {
+    it('6. Note should be valid if content is correct', function(done) {
         var n = new Note({title: correctTitle, content:correctContent});
 
         n.validate(function(err) {
@@ -150,9 +132,23 @@ describe('Note', function() {
             done();
         });
     });
+
+    it('7. Note should have the correct default tab set', function(done) {
+        var n = new Note({title: correctTitle, content: correctContent});
+
+        expect(n.tab).to.equal(defaultTabName);
+        done();
+    });
+
+    it('8. Note should have the date automatically set', function(done) {
+        var n = new Note({title: correctTitle, content: correctContent});
+
+        expect(n.date).to.be.defined;
+        done();
+    })
 });
 
-function verifyNoteErrorProperties(e, message, kind, path, value) {
+function verifyError(e, message, kind, path, value) {
   expect(e).to.exist;
   expect(e.message).to.equal(message);
   expect(e.kind).to.equal(kind);
@@ -160,10 +156,11 @@ function verifyNoteErrorProperties(e, message, kind, path, value) {
   expect(e.value).to.equal(value);
 };
 
-function generateString(count, ch) {
+function generateString(count) {
+    var justChar = 'a';
     var txt = "";
     for (var i = 0; i < count; i++) {
-        txt += ch;
+        txt += justChar;
     }
     return txt;
 };

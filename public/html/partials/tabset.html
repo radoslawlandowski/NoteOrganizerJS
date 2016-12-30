@@ -3,7 +3,7 @@
         <uib-tabset id="tabset" active="tsc.activeTab" justified="true">
             <uib-tab ng-repeat="tab in tabs track by $index" select="tsc.setActiveTab($index)">
                 <uib-tab-heading>
-                    <span class="tabTitle">{{tab.name}}</span>
+                    <span class="tabTitle">{{tab}}</span>
                     <span ng-show="tsc.isTabActive($index)" ng-click="tsc.deleteTab(tab)" class="glyphicon glyphicon-trash pull-right big-icon redOnHover iconOnTab"></span>
                 </uib-tab-heading>
 
@@ -22,7 +22,7 @@
 
                 <div ui-view="newNote"></div>
 
-                <note ng-repeat="note in notes | NoteByTabFilter: tab.name | orderBy: tsc.property : tsc.order as thisTabNotes track by note._id" view-mode="true" note="note" on-confirm="tsc.sendNote(note)" on-cancel="tsc.deleteNote(note)"></note>
+                <note ng-repeat="note in notes | NoteByTabFilter: tab | orderBy: tsc.property : tsc.order as thisTabNotes track by note._id" view-mode="true" note="note" on-confirm="tsc.sendNote(note)" on-cancel="tsc.deleteNote(note)"></note>
             </uib-tab>
         </uib-tabset>
     </div>

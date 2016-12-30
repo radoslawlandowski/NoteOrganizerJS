@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
+mongoose.set('debug', true)
+
 var User = require("../models/User.js");
+var Note = require("../models/Note.js");
 
 router.param('mail', function(req, res, next, mail) {
     User.findOne({ 'mail': mail }, function (err, post) {
@@ -13,55 +16,58 @@ router.param('mail', function(req, res, next, mail) {
     });
 });
 
-router.get('/', function(req, res, next) {
-  User.find(function (err, users) {
-    if(err) return next(err);
-    res.json(users);
-  });
-});
-
-router.get('/:mail', function(req, res, next) {
-  res.json(res.locals.user);
-});
+// ################ TABS ENDPOINTS ########################################
 
 router.get('/:mail/tabs', function(req, res, next) {
   res.json(res.locals.user.tabs);
 });
 
+router.post('/:mail/tabs', function(req, res, next) {
+  User.addTab(req.body.name, res.locals.user, function(err, doc) {
+    if(err) {
+      console.log(err);
+      res.sendStatus(500);
+    };
+    if(doc == null) {
+      res.sendStatus(409);
+    } else {
+      res.json(doc.tabs.pop());
+    }
+  });
+});
+
+router.delete('/:mail/tabs/:tabName', function(req, res, next) {
+  User.removeTab(req.params.tabName, res.locals.user, function(err, numAff) {
+    if(err) console.log(err); res.json(numAff);
+  });
+});
+
+
+// ################### NOTES ENDPOINTS ######################################
+
 router.get('/:mail/notes', function(req, res, next) {
   res.json(res.locals.user.notes);
 });
 
-router.post('/:mail/tabs', function(req, res, next) {
-  res.locals.user.tabs.push(req.body);
-  res.locals.user.save();
-  res.json(req.body);
-});
-
 router.post('/:mail/notes', function(req, res, next) {
-  res.locals.user.notes.push(req.body);
-  res.locals.user.save();
-  res.json(req.body);
-});
-
-router.put('/:mail/tabs', function(req, res, next) {
-  User.update(
-    { 'tabs._id': req.body._id },
-    { $set: {
-        'tabs.$': req.body
-    }}, function (err, numAffected) { console.log(numAffected); }
-  );
-  res.json(req.body);
+  User.addNote(req.body, res.locals.user, function(err, user) {
+    if(err) console.log(err); res.json(user.notes[user.notes.length-1]);
+  });
 });
 
 router.put('/:mail/notes', function(req, res, next) {
-  User.update(
-    { 'notes._id': req.body._id },
-    { $set: {
-        'notes.$': req.body
-    }}, function (err, numAffected) { console.log(numAffected); }
-  );
-  res.json(req.body);
+  User.editNote(req.body, res.locals.user, function(err, user) {
+    if(err) console.log(err); res.json(user);
+  });
 });
+
+router.delete('/:mail/notes/:noteId', function(req, res, next) {
+  User.removeNote(req.params.noteId, res.locals.user, function(err, numAff) {
+    if(err) console.log(err); res.sendStatus(200);
+  });
+});
+
+// #############################################################
+
 
 module.exports = router;

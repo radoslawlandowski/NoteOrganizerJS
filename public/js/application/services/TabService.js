@@ -18,8 +18,7 @@ define(['angular', 'application/NoteOrganizerModule'], function(angular, NoteOrg
                 return $q.reject(NotificationMessages.TAB_ALREADY_EXISTS);
             } else {
                 var tab = prepareTab(tabTitle);
-
-                return $http.put(UrlPaths.tabs.create, tab).then(function (response) {
+                return $http.post(UrlPaths.tabs.create, tab).then(function (response) {
                     return {tab: response.data, message: NotificationMessages.TAB_CREATED};
                 }, function (failure) {
                     if (failure.status === HttpCodes.CONFLICT.code) {
@@ -32,7 +31,7 @@ define(['angular', 'application/NoteOrganizerModule'], function(angular, NoteOrg
         };
 
         service.delete = function(tab) {
-            return $http.delete(UrlPaths.tabs.delete, {params: {id: tab.id} }).then(function() {
+            return $http.delete(UrlPaths.tabs.delete + "/" + tab).then(function() {
                 return NotificationMessages.TAB_DELETED;
             }, function(failure) {
                 return generalError(failure.status);
