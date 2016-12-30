@@ -4,7 +4,7 @@ define(['angular', 'application/NoteOrganizerModule', 'application/constants/Htt
         var service = this;
 
         service.all = function() {
-            return $http.get(UrlPaths.notes.all).then(function(response) {
+            return $http.get(UrlPaths.notes).then(function(response) {
                 return response.data;
             }, function(failure) {
                 return generalError(failure.status);
@@ -17,7 +17,7 @@ define(['angular', 'application/NoteOrganizerModule', 'application/constants/Htt
             }
             setDate(note);
 
-            return $http.post(UrlPaths.notes.create, note).then(function(response) {
+            return $http.post(UrlPaths.notes, note).then(function(response) {
                  if(angular.isUndefined(note._id)) {
                      return {note: response.data, message: NotificationMessages.NOTE_CREATED};
                  } else {
@@ -29,7 +29,7 @@ define(['angular', 'application/NoteOrganizerModule', 'application/constants/Htt
         };
 
         service.delete = function(note) {
-             return $http.delete(UrlPaths.notes.delete + "/" + note._id).then(function() {
+             return $http.delete(UrlPaths.notes + "/" + note._id).then(function() {
                  return {noteId: note._id, message: NotificationMessages.NOTE_DELETED};
             }, function(failure) {
                 return generalError(failure.status);
