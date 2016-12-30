@@ -10,24 +10,12 @@ define(['angular', 'angularMocks', 'application/constants/UrlPaths'], function(a
 
         describe('When calling a field it should return proper strings for', function() {
             it('notes', function() {
-                var expectedNote = {
-                    all:  "/api/notes/all",
-                    byId: "/api/notes/id",
-                    create: "/api/notes/create",
-                    delete: "/api/notes/delete"
-                };
-
+                var expectedNote = '/api/users/userMailOne/notes';
                 expect(urlPaths.notes).toEqual(expectedNote);
             });
 
             it('tabs', function() {
-                var expectedTab = {
-                    all:  "/api/tabs/all",
-                    byId: "/api/tabs/id",
-                    create: "/api/tabs/create",
-                    delete: "/api/tabs/delete"
-                };
-
+                var expectedTab = "/api/users/userMailOne/tabs";
                 expect(urlPaths.tabs).toEqual(expectedTab);
             });
         });
