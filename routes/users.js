@@ -26,18 +26,19 @@ router.post('/:mail/tabs', function(req, res, next) {
     if(err) {
       console.log(err);
       res.sendStatus(500);
-    };
-    if(doc == null) {
-      res.sendStatus(409);
     } else {
-      res.json(doc.tabs.pop());
+      if(doc == null) {
+        res.sendStatus(409);
+      } else {
+        res.json(doc.tabs.pop());
+      };
     }
   });
 });
 
 router.delete('/:mail/tabs/:tabName', function(req, res, next) {
   User.removeTab(req.params.tabName, res.locals.user, function(err, numAff) {
-    if(err) console.log(err); res.json(numAff);
+    res.sendStatus(handleDeletion(err, numAff.nModified));
   });
 });
 
@@ -62,11 +63,23 @@ router.put('/:mail/notes', function(req, res, next) {
 
 router.delete('/:mail/notes/:noteId', function(req, res, next) {
   User.removeNote(req.params.noteId, res.locals.user, function(err, numAff) {
-    if(err) console.log(err); res.sendStatus(200);
+    res.sendStatus(handleDeletion(err, numAff.nModified));
   });
 });
 
 // #############################################################
 
+function handleDeletion(err, nModified) {
+  if(err) {
+    console.log(err);
+    return 500;
+  } else {
+    if(nModified === 1) {
+      return 200;
+    } else {
+      return 409;
+    };
+  };
+}
 
 module.exports = router;

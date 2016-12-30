@@ -34,7 +34,11 @@ define(['angular', 'application/NoteOrganizerModule'], function(angular, NoteOrg
             return $http.delete(UrlPaths.tabs + "/" + tab).then(function() {
                 return NotificationMessages.TAB_DELETED;
             }, function(failure) {
-                return generalError(failure.status);
+                if(failure.status === HttpCodes.CONFLICT) {
+                    return $q.reject(NotificationMessages.TAB_DELETION_FAILED);
+                } else {
+                    return generalError(failure.status);
+                };
             });
         };
 

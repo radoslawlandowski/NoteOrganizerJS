@@ -28,7 +28,6 @@ var UserSchema = new mongoose.Schema({
     }],
     validate: {
       validator: function(t) {
-        console.log("ENTERED TAB VALIDATOR: " + t.length);
         return t.length <= maximumTabsNumber;
       },
       message: maxTabNumberMessage
@@ -52,8 +51,7 @@ UserSchema.statics.addTab = function (tab, user, callback) {
     if(user != null) {
       user.tabs.push(tab);
       user.save(callback);
-    }
-    callback(err, user);
+    };
   });
 };
 
