@@ -71,6 +71,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-env');
 
   grunt.registerTask('default', ['env', 'clean', 'copy', 'mochaTest:' + testTypes]);
-  grunt.registerTask('test', ['env', 'mochaTest:' + testTypes, 'copy:testResult', 'clean:testResult'])
+  grunt.registerTask('testResultMover', ['copy:testResult', 'clean:testResult']);
+  grunt.registerTask('runTest', ['env', 'mochaTest:' + testTypes]);
+  grunt.registerTask('test', ['runTest', 'testResultMover']);
 
 };
