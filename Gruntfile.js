@@ -1,11 +1,11 @@
 module.exports = function(grunt) {
 
   var testTypes = grunt.option('testTypes') || 'all';
-  var environment = grunt.option('environment') || 'development';
+  var environment = grunt.option('environment') || 'testing';
 
   var generalTestOptions = {
     reporter: grunt.option('testReporter') || 'spec',
-    captureFile: 'test-results.xml',
+    captureFile: '',
     quiet: false,
     clearRequireCache: true,
     noFail: false
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         //Shared Options Hash
       },
       dev : {
-        NODE_ENV : grunt.option('environment') || 'development'
+        NODE_ENV : grunt.option('environment') || 'testing'
       }
     },
 
@@ -28,10 +28,17 @@ module.exports = function(grunt) {
           {expand: true, cwd: "node_modules", src: ['**'], dest: 'public/js/lib/'},
         ],
       },
+      testResult: {
+        files: [
+          {expand: true, src: "test-results.xml", dest: "testResults/"}
+        ]
+      }
     },
 
     clean: {
-      public: ['public/js/lib/**']
+      public: ['public/js/lib/**'],
+      testResult: ['test-results.xml'],
+      testResultDirectory: ['testResults/*']
     },
 
     mochaTest: {
@@ -64,6 +71,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-env');
 
   grunt.registerTask('default', ['env', 'clean', 'copy', 'mochaTest:' + testTypes]);
-  grunt.registerTask('test', ['env', 'mochaTest:' + testTypes])
+  grunt.registerTask('test', ['env', 'mochaTest:' + testTypes, 'copy:testResult', 'clean:testResult'])
 
 };

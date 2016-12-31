@@ -3,3 +3,4 @@ node_modules/
 *.log
 test-reports.xml
 public/js/lib/
+testResults/
