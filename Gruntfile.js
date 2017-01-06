@@ -51,6 +51,11 @@ module.exports = function(grunt) {
         options: generalTestOptions,
         src: ['test/unit/**/*.js']
       },
+
+      all: {
+        options: generalTestOptions,
+        src: ['test/unit/**/*.js', 'test/integration/**/*.js']
+      },
     },
 
   });
@@ -63,8 +68,7 @@ module.exports = function(grunt) {
   grunt.registerTask('runTest', ['env', 'mochaTest:' + testTypes]);
   grunt.registerTask('testResultMover', ['copy:testResult', 'clean:testResult']);
 
-  grunt.registerTask('test', ['env', 'mochaTest:' + testTypes, 'copy:testResult', 'clean:testResult']);
-  grunt.registerTask('allTests', ['env', 'mochaTest:unit', 'mochaTest:integration', 'testResultMover']);
+  grunt.registerTask('test', ['runTest', 'testResultMover']);
   grunt.registerTask('default', ['env', 'clean:public', 'copy:main', 'test']);
 
 
