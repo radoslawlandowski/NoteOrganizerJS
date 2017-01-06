@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       },
       testResult: {
         files: [
-          {expand: true, src: "test-results.xml", dest: "testResults/"}
+          {expand: true, src: "*.xml", dest: "testResults/"}
         ]
       }
     },
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
   grunt.registerTask('testResultMover', ['copy:testResult', 'clean:testResult']);
 
   grunt.registerTask('test', ['runTest', 'testResultMover']);
-  grunt.registerTask('default', ['env', 'clean:public', 'copy:main', 'test']);
+  grunt.registerTask('default', ['env', 'clean:public', 'copy:main']);
 
 
 };
