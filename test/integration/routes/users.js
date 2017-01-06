@@ -68,7 +68,7 @@ describe('Integration tests:', () => {
             done();
           });
     });
-
+/*
     it('When posting tab already inside database it should return 409 status code', (done) => {
       var tab = firstUser.tabs[0];
       var requestUrl = '/api/users/' + mail + '/tabs';
@@ -82,7 +82,7 @@ describe('Integration tests:', () => {
       });
 
     });
-
+*/
     it('When posting valid tab it should return this tab', (done) => {
       var tab = firstUser.tabs[0] + "UNIQUE";
       var requestUrl = '/api/users/' + mail + '/tabs';
