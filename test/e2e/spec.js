@@ -3,25 +3,23 @@ var TabsetPage = require('../../pageObjects/TabsetPage');
 
 var mainPage, tabsetPage;
 
-describe('E2E Testing', function() {
+describe('NoteOrganizer E2E Testing', function() {
   beforeEach(function() {
       mainPage = new MainPage();
       tabsetPage = new TabsetPage();
   });
 
-  describe('Protractor Demo App', function() {
-      it('should have a title', function() {
-          browser.driver.sleep(3000);
-          expect(mainPage.bigHeading.getText()).toEqual("Note organizer!");
-  /*
-          expect(browser.driver.getTitle()).toEqual('Note Organizer!');
-          browser.driver.sleep(1000);
+  describe('Static data', function() {
+      it('should be correct', function() {
+        expect(browser.driver.getTitle()).toEqual('Note Organizer!');
+        expect(mainPage.bigHeading.getText()).toEqual("Note organizer!");
+        expect(mainPage.description.getText()).toEqual("A very simple application for creating, storing and viewing your notes!");
+      });
+  });
 
-          expect(element(by.id('bigHeading')).getText()).toEqual("Note organizer!");
-          expect(element(by.id('description')).getText()).toEqual("A very simple application for creating, storing and viewing your notes!");
-
-          element(by.id('newNoteButton')).click();*/
-        //f  browser.driver.sleep(4000);
+  describe('Clicking tabs', function() {
+      it('should be correct', function() {
+        expect(tabsetPage.tabSet).toContain(tabsetPage.tabOne);
 
       });
   });

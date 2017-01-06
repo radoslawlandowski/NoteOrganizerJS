@@ -13,5 +13,9 @@ exports.config = {
             savePath: 'testResults',
             filePrefix: 'e2e-test-results'
         }));
+    },
+
+    jasmineNodeOpts: {
+      showColors: true // Use colors in the command line report.
     }
 }

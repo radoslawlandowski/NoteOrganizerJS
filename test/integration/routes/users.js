@@ -80,6 +80,7 @@ describe('Integration tests:', () => {
               res.status.should.equal(409);
               done();
       });
+
     });
 
     it('When posting valid tab it should return this tab', (done) => {
