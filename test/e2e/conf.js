@@ -17,5 +17,5 @@ exports.config = {
 
     jasmineNodeOpts: {
       showColors: true // Use colors in the command line report.
-    }
+    },
 }

@@ -19,7 +19,6 @@ describe('NoteOrganizer E2E Testing', function() {
 
   describe('Clicking tabs', function() {
       it('should be correct', function() {
-        expect(tabsetPage.tabSet).toContain(tabsetPage.tabOne);
 
       });
   });
