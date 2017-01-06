@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-offset-1 col-lg-10">
         <uib-tabset id="tabset" active="tsc.activeTab" justified="true">
-            <uib-tab ng-repeat="tab in tabs track by $index" select="tsc.setActiveTab($index)">
+            <uib-tab id="tabset-tab-{{tab}}" ng-repeat="tab in tabs track by $index" select="tsc.setActiveTab($index)">
                 <uib-tab-heading>
                     <span class="tabTitle">{{tab}}</span>
                     <span ng-show="tsc.isTabActive($index)" ng-click="tsc.deleteTab(tab)" class="glyphicon glyphicon-trash pull-right big-icon redOnHover iconOnTab"></span>

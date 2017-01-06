@@ -61,7 +61,7 @@ module.exports = function(grunt) {
         options: generalTestOptions,
         src: ['test/endtoend/**/*.js']
       }
-    }
+    },
 
   });
 
