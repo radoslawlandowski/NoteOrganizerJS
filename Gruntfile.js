@@ -2,11 +2,12 @@ module.exports = function(grunt) {
 
   var testTypes = grunt.option('testTypes') || 'unit';
   var environment = grunt.option('environment') || 'testing';
+  var testReporter = grunt.option('testReporter') || 'spec';
 
   var generalTestOptions = {
-    reporter: grunt.option('testReporter') || 'spec',
+    reporter: testReporter,
     reporterOptions: {
-        mochaFile: 'testResults/' + testTypes + '-test-results.xml'
+        mochaFile: 'testResults/server-' + testTypes + '-test-results.xml'
     },
     captureFile: '',
     quiet: false,
