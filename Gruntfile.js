@@ -58,18 +58,69 @@ module.exports = function(grunt) {
       },
     },
 
+    run: {
+      startServer: {
+        options: {
+          wait: false,
+          ready: /Successfully connected to database: NoteOrganizer_*/
+        },
+        cmd: 'npm',
+        args: [
+          'start'
+        ]
+      },
+      stopServer: {
+        options: {
+          wait: true
+        },
+        cmd: 'fuser',
+        args: [
+          '-k',
+          '3000/tcp'
+        ]
+      }
+    },
+
+    protractor: {
+      options: {
+        configFile: "node_modules/protractor/example/conf.js", // Default config file
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false, // If true, protractor will not use colors in its output.
+        args: {
+          // Arguments passed to the command
+        }
+      },
+      test: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
+        options: {
+          configFile: "test/e2e/conf.js", // Target-specific config file
+          args: {} // Target-specific arguments
+        }
+      }
+    },
+
+    karma: {
+      all: {
+        configFile: 'karma.conf.js',
+        singleRun: true
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-run');
+  grunt.loadNpmTasks('grunt-protractor-runner');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('runTest', ['env', 'mochaTest:' + testTypes]);
   grunt.registerTask('testResultMover', ['copy:testResult', 'clean:testResult']);
 
   grunt.registerTask('test', ['runTest', 'testResultMover']);
+  grunt.registerTask('start', ['env', 'run:startServer']);
   grunt.registerTask('default', ['env', 'clean:public', 'copy:main']);
+  grunt.registerTask('test-e2e', ['start', 'protractor:test', 'run:stopServer']);
 
 
 };
