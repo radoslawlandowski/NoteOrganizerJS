@@ -5,6 +5,9 @@ module.exports = function(grunt) {
 
   var generalTestOptions = {
     reporter: grunt.option('testReporter') || 'spec',
+    reporterOptions: {
+        mochaFile: 'testResults/' + testTypes + '-test-results.xml'
+    },
     captureFile: '',
     quiet: false,
     clearRequireCache: true,
