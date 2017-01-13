@@ -27,10 +27,10 @@ router.post('/:mail/tabs', function(req, res, next) {
       console.log(err);
       res.sendStatus(500);
     } else {
-      if(doc == null) {
+      if(doc.nModified === 0) {
         res.sendStatus(409);
       } else {
-        res.json(doc.tabs.pop());
+        res.json(req.body.name);
       };
     }
   });
@@ -51,13 +51,31 @@ router.get('/:mail/notes', function(req, res, next) {
 
 router.post('/:mail/notes', function(req, res, next) {
   User.addNote(req.body, res.locals.user, function(err, user) {
-    if(err) console.log(err); res.json(user.notes[user.notes.length-1]);
+    if(err) {
+      console.log(err);
+      res.sendStatus(409);
+    } else {
+      if(user != null || user != undefined) {
+        res.json(user.notes[user.notes.length-1]);
+      } else {
+        res.sendStatus(409);
+      }
+    }
   });
 });
 
 router.put('/:mail/notes', function(req, res, next) {
   User.editNote(req.body, res.locals.user, function(err, user) {
-    if(err) console.log(err); res.json(user);
+    if(err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      if(user != null || user != undefined) {
+        res.json(user.notes.id(req.body._id));
+      } else {
+        res.sendStatus(409);
+      }
+    }
   });
 });
 

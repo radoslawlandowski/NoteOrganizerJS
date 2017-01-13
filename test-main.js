@@ -25,7 +25,6 @@ require.config({
       'karma-requireJS': 'lib/karma-require',
       'uiBootstrap': 'lib/angular-bootstrap/ui-bootstrap',
       'uiBootstrapTemplates' : 'lib/angular-bootstrap/ui-bootstrap-tpls',
-    //  'ngAnimate': 'lib/angular-animate/angular-animate.min',
       'angular-filter': 'lib/angular-filter/dist/angular-filter.min',
       'ng-dialog' : 'lib/ng-dialog/js/ngDialog',
       'angular-growl-notifications': 'lib/angular-growl-notifications/dist/angular-growl-notifications',
@@ -44,9 +43,6 @@ require.config({
       'uiBootstrapTemplates' : {
           deps: ['angular']
       },
-  //    'ngAnimate' : {
-    //      deps: ['angular']
-  //    },
       'angular-filter' : {
           deps: ['angular']
       },

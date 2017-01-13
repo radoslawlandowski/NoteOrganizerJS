@@ -50,7 +50,7 @@ var getValidNote = function() {
   var correctTitle = generateString(titleMinLength + 1);
   var correctContent = generateString(contentMinLength + 1);
 
-  return new Note({title: correctTitle, content: correctContent});
+  return new Note({title: correctTitle, content: correctContent, tab: "one"});
 };
 
 var getValidUser = function() {

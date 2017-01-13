@@ -49,7 +49,7 @@ define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOr
             type: "notificationInfo"
         },
         ANY_OTHER_FAILURE: {
-            content: "There was an error that was never expected by us :( HttpCode:  ",
+            content: "There was an error that was never expected by us :(",
             type: "notificationError"
         }
     });

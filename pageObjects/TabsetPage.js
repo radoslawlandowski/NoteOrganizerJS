@@ -13,6 +13,7 @@ var TabsetPage = function () {
     tabSet: { get: function () { return element(by.id(tabSet)); }},
     tabOne: { get: function () { return element(by.id(tabNameOne)); }},
     tabTwo: { get: function () { return element(by.id(tabNameTwo)); }},
+    newTabButton: { get: function () { return element(by.id("newTabButton")); }}
 });
 
 module.exports = TabsetPage;

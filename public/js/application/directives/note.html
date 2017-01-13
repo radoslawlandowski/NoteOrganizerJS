@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <span ng-show="viewMode" class="date-field pull-right text-color">{{current.date | date:'dd MMM yyyy HH:mm:ss'}}</span>
                     <div>
-                        <input type="text" ng-model="current.tab" ng-hide="viewMode" placeholder="Choose the tab..." class="text-input-styling"/>
+                        <input type="text" ng-model="current.tab" ng-hide="viewMode" placeholder="Choose the tab..." class="text-input-styling text-color"/>
                     </div>
                 </div>
                 <div class="col-sm-1">
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <textarea type="text" ng-model="current.content" ng-disabled="viewMode" placeholder="...and the content!" class="text-input-styling text-color"></textarea>
+                        <textarea id="contentInput" type="text" ng-model="current.content" ng-disabled="viewMode" placeholder="...and the content!" class="text-input-styling text-color"></textarea>
                     </div>
                 </div>
             </div>
