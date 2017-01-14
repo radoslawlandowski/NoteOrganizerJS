@@ -2,7 +2,6 @@ var TestUsers = require('../data/TestUsers');
 var User = require('../models/User');
 var Note = require('../models/Note');
 var config = require("../NoteOrganizer.config.json");
-
 var logPrefix = "### TEST HELPER ###";
 var logSuffix = "###################";
 

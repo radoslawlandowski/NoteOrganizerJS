@@ -1,12 +1,24 @@
+var TestHelper = require('../TestHelper');
+
 var MainPage = require('../../pageObjects/MainPage');
 var TabsetPage = require('../../pageObjects/TabsetPage');
+var Dialog = require('../../pageObjects/DialogsPage');
+var Notification = require('../../pageObjects/NotificationsPage');
 
-var mainPage, tabsetPage;
+var mainPage, tabsetPage, dialog, notification;
 
 describe('NoteOrganizer E2E Testing', function() {
+
+  beforeAll(function() {
+    TestHelper.clearCollection();
+    TestHelper.populateCollection();
+  });
+
   beforeEach(function() {
       mainPage = new MainPage();
       tabsetPage = new TabsetPage();
+      dialog = new Dialog();
+      notification = new Notification();
   });
 /*
   describe('Static data', function() {
@@ -16,25 +28,47 @@ describe('NoteOrganizer E2E Testing', function() {
         expect(mainPage.description.getText()).toEqual("A very simple application for creating, storing and viewing your notes!");
       });
   });
-*/
+
   describe('New tab', function() {
       it('should be correct', function() {
-        tabsetPage.newTabButton.click();
-        element(by.id("dialog-New tab")).element(by.id("New tab-input")).sendKeys('rrrr');
-        element(by.id("New tab-confirm")).click();
-        element(by.id("notification-popup")).getText().then(function(attr) {
-          expect(attr).toEqual("The tab has been created");
-        });
+        tabsetPage.createNewTab();
+        expect(dialog.getFirstHeader()).toEqual("Enter the title of your new tab");
+        expect(dialog.getSecondHeader()).toEqual("");
+        dialog.fillInput("5");
+        dialog.confirmDialog();
+        expect(notification.getText()).toEqual("The tab has been created");
+        expect(notification.getType()).toContain("notificationSuccess");
+
+        tabsetPage.getTab("5").click();
+        browser.driver.sleep(2000);
+        tabsetPage.getTab("0000021").click();
+        browser.driver.sleep(2000);
+        tabsetPage.getTab("5").click();
+        browser.driver.sleep(2000);
+
+
+        expect(tabsetPage.tabDisplayed("5")).toEqual(true);
       });
   });
- /*
-  describe('Amount of notes in first tab', function() {
+*/
+  describe('Deleting tab', function() {
       it('should be correct', function() {
-        element.all(by.repeater('note in notes')).count().then(function(count) {
-          expect(count).toEqual(3);
-        });
+        tabsetPage.getTab("5").click();
+        tabsetPage.getDeleteTabButton("5").click();
+
+        expect(dialog.getFirstHeader()).toEqual("Are you sure you want to delete this tab?");
+        expect(dialog.getSecondHeader()).toEqual("The notes associated with it will also be deleted!");
+        expect(dialog.inputDisplayed()).toEqual(false);
+
+        dialog.confirmDialog();
+        expect(notification.getText()).toEqual("The tab has been deleted");
+        expect(notification.getType()).toContain("notificationSuccess");
+        expect(tabsetPage.tabDisplayed("5")).toEqual(false);
+
+        browser.driver.sleep(2000);
       });
   });
+  /*
 
   describe('Clicking on a tab', function() {
       it('should change active tab', function() {

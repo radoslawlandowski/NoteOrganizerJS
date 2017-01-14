@@ -1,27 +1,27 @@
-<div id="dialog-{{content.title}}">
+<div id="dialog">
   <div class="row center-block">
       <center>
-          <h3>
+          <h3 id="dialog-title">
               {{content.title}}
           </h3>
-          <h6>
+          <h6 id="dialog-firstHeader">
               {{content.firstHeader}}
           </h6>
-          <h6>
+          <h6 id="dialog-secondHeader">
               {{content.secondHeader}}
           </h6>
           <div ng-if="content.showInput">
-              <input id="{{content.title}}-input" type="text" ng-model="content.dialogInput" style="width:50%" ng-init="content.dialogInput = ''" ng-hide="viewMode" placeholder="{{content.inputPlaceholder}}" class="text-input-styling"/>
+              <input id="dialog-input" type="text" ng-model="content.dialogInput" style="width:50%" ng-init="content.dialogInput = ''" ng-hide="viewMode" placeholder="{{content.inputPlaceholder}}" class="text-input-styling"/>
           </div>
       </center>
   </div>
   <hr>
   <div class="row center-block">
       <span>
-            <button id="{{content.title}}-cancel" type="button" class="btn btn-primary pull-left" ng-click="closeThisDialog()">Cancel</button>
+            <button id="dialog-cancel" type="button" class="btn btn-primary pull-left" ng-click="closeThisDialog()">Cancel</button>
       </span>
       <span>
-            <button id="{{content.title}}-confirm" type="button" class="btn btn-danger pull-right" ng-click="confirm(content.dialogInput)">Confirm</button>
+            <button id="dialog-confirm" type="button" class="btn btn-danger pull-right" ng-click="confirm(content.dialogInput)">Confirm</button>
       </span>
   </div>
 </div>

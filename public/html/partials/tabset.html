@@ -3,8 +3,8 @@
         <uib-tabset id="tabset" active="tsc.activeTab" justified="true">
             <uib-tab id="tabset-tab-{{tab}}" ng-repeat="tab in tabs track by $index" select="tsc.setActiveTab($index)">
                 <uib-tab-heading>
-                    <span class="tabTitle">{{tab}}</span>
-                    <span ng-show="tsc.isTabActive($index)" ng-click="tsc.deleteTab(tab)" class="glyphicon glyphicon-trash pull-right big-icon redOnHover iconOnTab"></span>
+                    <span id="UNIQUE" class="tabTitle">{{tab}}</span>
+                    <span id="deleteTabButton" ng-show="tsc.isTabActive($index)" ng-click="tsc.deleteTab(tab)" class="glyphicon glyphicon-trash pull-right big-icon redOnHover iconOnTab"></span>
                 </uib-tab-heading>
 
                 <center>
