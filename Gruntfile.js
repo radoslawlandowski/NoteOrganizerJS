@@ -82,14 +82,20 @@ module.exports = function(grunt) {
           '-k',
           '3000/tcp'
         ]
+      },
+      kill: {
+        options: {
+          wait: true
+        },
+        cmd: 'scripts/killServerIfRuns.sh'
       }
-    },
 
+    },
     protractor: {
       options: {
         configFile: "node_modules/protractor/example/conf.js", // Default config file
         keepAlive: true, // If false, the grunt process stops when the test fails.
-        noColor: false, // If true, protractor will not use colors in its output.
+        noColor: true, // If true, protractor will not use colors in its output.
         args: {
           // Arguments passed to the command
         }
@@ -106,6 +112,10 @@ module.exports = function(grunt) {
       all: {
         configFile: 'karma.conf.js',
         singleRun: false
+      },
+      allSingleRun: {
+        configFile: 'karma.conf.js',
+        singleRun: true
       }
     }
   });
@@ -120,11 +130,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('runTest', ['env', 'mochaTest:' + testTypes]);
   grunt.registerTask('testResultMover', ['copy:testResult', 'clean:testResult']);
-
   grunt.registerTask('test', ['runTest', 'testResultMover']);
-  grunt.registerTask('start', ['env', 'run:stopServer', 'run:startServer']);
+  grunt.registerTask('start', ['env', 'run:kill', 'run:startServer']);
   grunt.registerTask('default', ['env', 'clean:public', 'copy:main']);
   grunt.registerTask('test-e2e', ['start', 'protractor:test', 'run:stopServer']);
-
 
 };

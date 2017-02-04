@@ -16,7 +16,6 @@ function Note() {
   };
 
   this.getNotes = function(tab) {
-    return false;
   };
 
   this.getNewNote = function(tab) {

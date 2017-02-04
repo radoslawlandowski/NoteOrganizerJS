@@ -5,7 +5,7 @@ var config = require("../NoteOrganizer.config.json");
 var logPrefix = "### TEST HELPER ###";
 var logSuffix = "###################";
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/NoteOrganizer_Testing');
+//mongoose.connect('mongodb://localhost/NoteOrganizer_Testing');
 mongoose.Promise = global.Promise;
 
 var notesSettings = config.Settings.Notes;
