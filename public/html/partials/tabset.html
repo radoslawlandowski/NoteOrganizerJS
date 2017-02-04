@@ -22,7 +22,7 @@
 
                 <div ui-view="newNote"></div>
 
-                <note id="note-{{tab}}-{{$index}}" ng-repeat="note in notes | NoteByTabFilter: tab | orderBy: tsc.property : tsc.order as thisTabNotes track by note._id" view-mode="true" note="note" on-confirm="tsc.sendNote(note)" on-cancel="tsc.deleteNote(note)"></note>
+                <note id="note-{{tab}}-{{note.title}}" ng-repeat="note in notes | NoteByTabFilter: tab | orderBy: tsc.property : tsc.order as thisTabNotes track by note._id" view-mode="true" note="note" on-confirm="tsc.sendNote(note)" on-cancel="tsc.deleteNote(note)"></note>
             </uib-tab>
         </uib-tabset>
     </div>

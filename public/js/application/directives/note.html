@@ -11,13 +11,13 @@
                 <div class="col-sm-6">
                     <span ng-show="viewMode" class="date-field pull-right text-color">{{current.date | date:'dd MMM yyyy HH:mm:ss'}}</span>
                     <div>
-                        <input type="text" ng-model="current.tab" ng-hide="viewMode" placeholder="Choose the tab..." class="text-input-styling text-color"/>
+                        <input id="tabInput" type="text" ng-model="current.tab" ng-hide="viewMode" placeholder="Choose the tab..." class="text-input-styling text-color"/>
                     </div>
                 </div>
                 <div class="col-sm-1">
                     <div class="pull-right" role="group" aria-label="...">
-                        <span class="glyphicon glyphicon-edit orange-on-hover big-icon pull-right" ng-show="viewMode" ng-click="editNote()"></span>
-                        <span class="glyphicon glyphicon-trash red-on-hover big-icon pull-right" ng-hide="viewMode" ng-click="cancel()"></span>
+                        <span id="editNoteButton" class="glyphicon glyphicon-edit orange-on-hover big-icon pull-right" ng-show="viewMode" ng-click="editNote()"></span>
+                        <span id="deleteNoteButton" class="glyphicon glyphicon-trash red-on-hover big-icon pull-right" ng-hide="viewMode" ng-click="cancel()"></span>
                     </div>
                 </div>
             </div>
@@ -29,8 +29,8 @@
                 </div>
             </div>
             <div class="row pull-right">
-                <span class="glyphicon glyphicon-remove orange-on-hover really-big-icon" ng-hide="viewMode || !isNotePresent()" ng-click="discard()"></span>
-                <span class="glyphicon glyphicon-ok green-on-hover really-big-icon" ng-hide="viewMode" ng-click="onConfirm({note: current}); viewMode=true"></span>
+                <span id="discardNoteButton" class="glyphicon glyphicon-remove orange-on-hover really-big-icon" ng-hide="viewMode || !isNotePresent()" ng-click="discard()"></span>
+                <span id="confirmNoteButton" class="glyphicon glyphicon-ok green-on-hover really-big-icon" ng-hide="viewMode" ng-click="onConfirm({note: current}); viewMode=true"></span>
             </div>
         </div>
     </div>

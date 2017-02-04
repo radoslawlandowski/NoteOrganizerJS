@@ -1,56 +1,56 @@
 'use strict';
 
 function Dialog () {
-  this._prefix = "dialog-";
-  this._confirmButtonId = this._prefix + "confirm";
-  this.__cancelButtonId = this._prefix + "cancel";
-  this._inputId = this._prefix + "input";
-  this._titleId = this._prefix + "title";
-  this._firstHeaderId = this._prefix + "firstHeader";
-  this._secondHeaderId = this._prefix + "secondHeader";
-};
+  var prefix = "dialog-";
+  var confirmButtonId = prefix + "confirm";
+  var cancelButtonId = prefix + "cancel";
+  var inputId = prefix + "input";
+  var titleId = prefix + "title";
+  var firstHeaderId = prefix + "firstHeader";
+  var secondHeaderId = prefix + "secondHeader";
 
-function clickButton(button) {
-  element(by.id(button)).click();
-};
+  function clickButton(button) {
+    element(by.id(button)).click();
+  };
 
-function getText(textId) {
-  return element(by.id(textId)).getText();
-};
+  function getText(textId) {
+    return element(by.id(textId)).getText();
+  };
 
-Dialog.prototype.confirmDialog = function() {
-  clickButton(this._confirmButtonId);
-};
+  this.confirmDialog = function() {
+    clickButton(confirmButtonId);
+  };
 
-Dialog.prototype.cancelDialog = function() {
-  clickButton(this._cancelButtonId);
-};
+  this.cancelDialog = function() {
+    clickButton(cancelButtonId);
+  };
 
-Dialog.prototype.getTitle = function() {
-  return getText(this._titleId);
-};
+  this.getTitle = function() {
+    return getText(titleId);
+  };
 
-Dialog.prototype.getFirstHeader = function() {
-  return getText(this._firstHeaderId);
-};
+  this.getFirstHeader = function() {
+    return getText(firstHeaderId);
+  };
 
-Dialog.prototype.getSecondHeader = function() {
-  return getText(this._secondHeaderId);
-};
+  this.getSecondHeader = function() {
+    return getText(secondHeaderId);
+  };
 
-Dialog.prototype.fillInput = function(input) {
-  element(by.id(this._inputId)).sendKeys(input);
-};
+  this.fillInput = function(input) {
+    element(by.id(inputId)).sendKeys(input);
+  };
 
-Dialog.prototype.inputDisplayed = function() {
-  return element(by.id(this._inputId)).isDisplayed().then(function(condition) {
-    return condition;
-  }).then(function(success) {
-    return true;
-  }, function (error) {
-    console.log('A NoSuchElement exception was throw because the element is NOT displayed so false is returned');
-    return false;
-  });
+  this.inputDisplayed = function() {
+    return element(by.id(inputId)).isDisplayed().then(function(condition) {
+      return condition;
+    }).then(function(success) {
+      return true;
+    }, function (error) {
+      console.log('A NoSuchElement exception was throw because the element is NOT displayed so false is returned');
+      return false;
+    });
+  };
 };
 
 module.exports = Dialog;

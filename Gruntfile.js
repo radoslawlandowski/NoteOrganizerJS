@@ -122,7 +122,7 @@ module.exports = function(grunt) {
   grunt.registerTask('testResultMover', ['copy:testResult', 'clean:testResult']);
 
   grunt.registerTask('test', ['runTest', 'testResultMover']);
-  grunt.registerTask('start', ['env', 'run:startServer']);
+  grunt.registerTask('start', ['env', 'run:stopServer', 'run:startServer']);
   grunt.registerTask('default', ['env', 'clean:public', 'copy:main']);
   grunt.registerTask('test-e2e', ['start', 'protractor:test', 'run:stopServer']);
 

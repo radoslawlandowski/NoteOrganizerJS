@@ -1,3 +1,6 @@
+var mongoose = require('mongoose');
+
+
 var User = require('../models/User');
 var Note = require('../models/Note');
 var Tab = require('../models/Tab');
