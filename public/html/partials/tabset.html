@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-lg-offset-1 col-lg-10">
         <uib-tabset id="tabset" active="tsc.activeTab" justified="true">
-            <uib-tab ng-repeat="tab in tabs track by $index" select="tsc.setActiveTab($index)">
+            <uib-tab id="tabset-tab-{{tab}}" ng-repeat="tab in tabs track by $index" select="tsc.setActiveTab($index)">
                 <uib-tab-heading>
-                    <span class="tabTitle">{{tab}}</span>
-                    <span ng-show="tsc.isTabActive($index)" ng-click="tsc.deleteTab(tab)" class="glyphicon glyphicon-trash pull-right big-icon redOnHover iconOnTab"></span>
+                    <span id="UNIQUE" class="tabTitle">{{tab}}</span>
+                    <span id="deleteTabButton" ng-show="tsc.isTabActive($index)" ng-click="tsc.deleteTab(tab)" class="glyphicon glyphicon-trash pull-right big-icon redOnHover iconOnTab"></span>
                 </uib-tab-heading>
 
                 <center>
@@ -22,18 +22,18 @@
 
                 <div ui-view="newNote"></div>
 
-                <note ng-repeat="note in notes | NoteByTabFilter: tab | orderBy: tsc.property : tsc.order as thisTabNotes track by note._id" view-mode="true" note="note" on-confirm="tsc.sendNote(note)" on-cancel="tsc.deleteNote(note)"></note>
+                <note id="note-{{tab}}-{{note.title}}" ng-repeat="note in notes | NoteByTabFilter: tab | orderBy: tsc.property : tsc.order as thisTabNotes track by note._id" view-mode="true" note="note" on-confirm="tsc.sendNote(note)" on-cancel="tsc.deleteNote(note)"></note>
             </uib-tab>
         </uib-tabset>
     </div>
 
      <div class="col-lg-1 new-tab-icon pull-right" ng-hide="tsc.tabsFull(tabs)">
-         <span ng-click="tsc.newTab()" class="glyphicon glyphicon-plus greenOnHover big-icon iconOnTab extremely-big-icon"></span>
+         <span id="newTabButton" ng-click="tsc.newTab()" class="glyphicon glyphicon-plus greenOnHover big-icon iconOnTab extremely-big-icon"></span>
      </div>
 </div>
 
 <div ng-repeat="(id, notification) in tsc.notifications track by id">
-    <growl-notification ng-class="{'{{notification.type}}' : true}" class="shadowed">
+    <growl-notification id="notification-popup" ng-class="{'{{notification.type}}' : true}" class="shadowed">
         {{notification.content}}
     </growl-notification>
 </div>

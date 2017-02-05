@@ -13,12 +13,12 @@ var users = require('./routes/users');
 var app = express();
 
 var config;
-if(process.env.NODE_ENV == "testing") {
-  config = require('./configs/testing.json');
+if(process.env.NODE_ENV == "development") {
+  config = require('./configs/development.json');
 } else if (process.env.NODE_ENV == "production") {
   config = require('./configs/production.json');
 } else {
-  config = require('./configs/development.json');
+  config = require('./configs/testing.json');
 };
 
 var databaseName = config.dbSettings.db;

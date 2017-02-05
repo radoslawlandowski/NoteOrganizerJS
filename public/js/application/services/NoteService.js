@@ -55,7 +55,7 @@ define(['angular', 'application/NoteOrganizerModule', 'application/constants/Htt
         };
 
         function generalError(statusCode) {
-            return $q.reject(NotificationMessages.ANY_OTHER_FAILURE + "HttpCode: " + statusCode);
+            return $q.reject(NotificationMessages.ANY_OTHER_FAILURE);
         };
     });
 });

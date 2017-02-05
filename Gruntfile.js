@@ -1,10 +1,14 @@
 module.exports = function(grunt) {
 
-  var testTypes = grunt.option('testTypes') || 'all';
+  var testTypes = grunt.option('testTypes') || 'unit';
   var environment = grunt.option('environment') || 'testing';
+  var testReporter = grunt.option('testReporter') || 'spec';
 
   var generalTestOptions = {
-    reporter: grunt.option('testReporter') || 'spec',
+    reporter: testReporter,
+    reporterOptions: {
+        mochaFile: 'testResults/server-' + testTypes + '-test-results.xml'
+    },
     captureFile: '',
     quiet: false,
     clearRequireCache: true,
@@ -30,7 +34,7 @@ module.exports = function(grunt) {
       },
       testResult: {
         files: [
-          {expand: true, src: "test-results.xml", dest: "testResults/"}
+          {expand: true, src: "*.xml", dest: "testResults/"}
         ]
       }
     },
@@ -42,11 +46,6 @@ module.exports = function(grunt) {
     },
 
     mochaTest: {
-      all: {
-        options: generalTestOptions,
-        src: ['test/**/*.js']
-      },
-
       integration: {
         options: generalTestOptions,
         src: ['test/integration/**/*.js']
@@ -57,24 +56,83 @@ module.exports = function(grunt) {
         src: ['test/unit/**/*.js']
       },
 
-      endtoend: {
+      all: {
         options: generalTestOptions,
-        src: ['test/endtoend/**/*.js']
+        src: ['test/unit/**/*.js', 'test/integration/**/*.js']
+      },
+    },
+
+    run: {
+      startServer: {
+        options: {
+          wait: false,
+          ready: /Successfully connected to database: NoteOrganizer_*/
+        },
+        cmd: 'npm',
+        args: [
+          'start'
+        ]
+      },
+      stopServer: {
+        options: {
+          wait: true
+        },
+        cmd: 'fuser',
+        args: [
+          '-k',
+          '3000/tcp'
+        ]
+      },
+      kill: {
+        options: {
+          wait: true
+        },
+        cmd: 'scripts/killServerIfRuns.sh'
+      }
+
+    },
+    protractor: {
+      options: {
+        configFile: "node_modules/protractor/example/conf.js", // Default config file
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: true, // If true, protractor will not use colors in its output.
+        args: {
+          // Arguments passed to the command
+        }
+      },
+      test: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
+        options: {
+          configFile: "test/e2e/conf.js", // Target-specific config file
+          args: {} // Target-specific arguments
+        }
+      }
+    },
+
+    karma: {
+      all: {
+        configFile: 'karma.conf.js',
+        singleRun: false
+      },
+      allSingleRun: {
+        configFile: 'karma.conf.js',
+        singleRun: true
       }
     }
-
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-run');
+  grunt.loadNpmTasks('grunt-protractor-runner');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('runTest', ['env', 'mochaTest:' + testTypes]);
   grunt.registerTask('testResultMover', ['copy:testResult', 'clean:testResult']);
-
   grunt.registerTask('test', ['runTest', 'testResultMover']);
-  grunt.registerTask('default', ['env', 'clean:public', 'copy:main', 'test']);
-
+  grunt.registerTask('start', ['env', 'run:kill', 'run:startServer']);
+  grunt.registerTask('default', ['env', 'clean:public', 'copy:main']);
+  grunt.registerTask('test-e2e', ['start', 'protractor:test', 'run:stopServer']);
 
 };

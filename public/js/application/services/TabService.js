@@ -65,7 +65,7 @@ define(['angular', 'application/NoteOrganizerModule'], function(angular, NoteOrg
         };
 
         function generalError(statusCode) {
-            return $q.reject(NotificationMessages.ANY_OTHER_FAILURE + statusCode);
+            return $q.reject(NotificationMessages.ANY_OTHER_FAILURE);
         };
     })
 });

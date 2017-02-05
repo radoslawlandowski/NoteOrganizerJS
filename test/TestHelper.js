@@ -2,9 +2,11 @@ var TestUsers = require('../data/TestUsers');
 var User = require('../models/User');
 var Note = require('../models/Note');
 var config = require("../NoteOrganizer.config.json");
-
 var logPrefix = "### TEST HELPER ###";
 var logSuffix = "###################";
+var mongoose = require('mongoose');
+//mongoose.connect('mongodb://localhost/NoteOrganizer_Testing');
+mongoose.Promise = global.Promise;
 
 var notesSettings = config.Settings.Notes;
 var titleMinLength = Number(notesSettings.titleMinLength);
@@ -50,7 +52,7 @@ var getValidNote = function() {
   var correctTitle = generateString(titleMinLength + 1);
   var correctContent = generateString(contentMinLength + 1);
 
-  return new Note({title: correctTitle, content: correctContent});
+  return new Note({title: correctTitle, content: correctContent, tab: "one"});
 };
 
 var getValidUser = function() {

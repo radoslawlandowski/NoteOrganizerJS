@@ -65,7 +65,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
             });
 
             it('500 from backend it should return a message', function () {
-                var expectedMessage = NotificationMessages.ANY_OTHER_FAILURE + HttpCodes.INTERNAL_SERVER_ERROR.code;
+                var expectedMessage = NotificationMessages.ANY_OTHER_FAILURE;
 
                 $httpBackend.expectGET(UrlPaths.tabs).respond(HttpCodes.INTERNAL_SERVER_ERROR.code);
 
@@ -169,7 +169,7 @@ define(['angular', 'angularMocks', 'application/services/TabService', 'applicati
 
                     $httpBackend.flush();
 
-                    expect(achievedMessage).toEqual(NotificationMessages.ANY_OTHER_FAILURE + code);
+                    expect(achievedMessage).toEqual(NotificationMessages.ANY_OTHER_FAILURE);
                 });
             });
         });
