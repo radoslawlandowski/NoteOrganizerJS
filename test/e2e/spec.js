@@ -117,6 +117,7 @@ describe('NoteOrganizer E2E Testing', function() {
         expect(dialog.inputDisplayed()).toEqual(false);
 
         dialog.confirmDialog();
+        browser.driver.sleep(2000);
         expect(notification.isDisplayed()).toEqual(true);
         expect(tabsetPage.tabDisplayed(tabName)).toEqual(false);
       });
