@@ -1,4 +1,4 @@
-define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOrganizerModule) {
+define(['application/NoteOrganizerModule'], function (NoteOrganizerModule) {
     NoteOrganizerModule.constant("HttpCodes", {
         CREATED: {
             code: 201
@@ -19,5 +19,4 @@ define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOr
             code: 500
         }
     });
-    return NoteOrganizerModule;
 });

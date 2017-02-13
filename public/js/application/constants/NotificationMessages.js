@@ -1,4 +1,4 @@
-define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOrganizerModule) {
+define(['application/NoteOrganizerModule'], function (NoteOrganizerModule) {
     NoteOrganizerModule.constant("NotificationMessages", {
         TAB_CREATED: {
             content: "The tab has been created",
@@ -49,9 +49,8 @@ define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOr
             type: "notificationInfo"
         },
         ANY_OTHER_FAILURE: {
-            content: "There was an error that was never expected by us :(",
+            content: "There was an error that was not expected by the programmer :(",
             type: "notificationError"
         }
     });
-    return NoteOrganizerModule;
 });

@@ -1,4 +1,4 @@
-define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOrganizerModule) {
+define(['application/NoteOrganizerModule'], function (NoteOrganizerModule) {
     NoteOrganizerModule.directive('filterBarDirective', function () {
         return {
             restrict: 'E',
@@ -10,21 +10,16 @@ define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOr
             link: function (scope) {
                 scope.ascending = true;
 
-                scope.changeOrder = function() {
+                scope.inverseOrder = function() {
                     scope.ascending = !scope.ascending;
-                    if(scope.ascending) {
-                        scope.icon = 'glyphicon-sort-by-attributes';
-                    } else {
-                        scope.icon = 'glyphicon-sort-by-attributes-alt';
-                    }
                 };
 
-                scope.changeProperty = function(property) {
+                scope.setProperty = function(property) {
                     scope.selected = property;
                 };
 
                 scope.isActive = function(property) {
-                    return property === scope.selected ? true : false;
+                    return property === scope.selected;
                 };
             },
             templateUrl: 'js/application/directives/FilterBar.html'

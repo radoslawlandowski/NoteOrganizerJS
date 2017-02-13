@@ -1,7 +1,6 @@
-define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOrganizerModule) {
+define(['application/NoteOrganizerModule'], function (NoteOrganizerModule) {
     NoteOrganizerModule.constant("UrlPaths", {
-        notes: "/api/users/userMailOne/notes", //hardcoded the user for the sake of testing
+        notes: "/api/users/userMailOne/notes",
         tabs: "/api/users/userMailOne/tabs"
     });
-    return NoteOrganizerModule;
 });

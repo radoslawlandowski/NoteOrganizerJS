@@ -1,4 +1,4 @@
-define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOrganizerModule) {
+define(['application/NoteOrganizerModule'], function (NoteOrganizerModule) {
     NoteOrganizerModule.constant("DialogMessages", {
         TAB_DELETION: {
             title: "Delete tab!",
@@ -50,5 +50,4 @@ define(['angular', 'application/NoteOrganizerModule'], function (angular, NoteOr
             showInput: false
         }
     });
-    return NoteOrganizerModule;
 });

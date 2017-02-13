@@ -1,9 +1,8 @@
 <div class="filter-bar">
     <span class="filter-text">Sort by:</span>
-    <span class="filter-icon" ng-class="{'filter-icon-active' : isActive(property)}" ng-repeat="property in properties" ng-click="changeProperty(property)">
+    <span id="{{property}}-button" class="filter-icon" ng-class="{'filter-icon-active' : isActive(property)}" ng-repeat="property in properties" ng-click="setProperty(property)">
         {{property}}
         <span class="filter-text"> | </span>
     </span>
-    <span id="sth" ng-show="!ascending" class="glyphicon glyphicon-sort-by-attributes filter-icon" ng-click="changeOrder()"></span>
-    <span ng-show="ascending" class="glyphicon glyphicon-sort-by-attributes-alt filter-icon" ng-click="changeOrder()"></span>
+    <span id="inverseOrderButton" class="glyphicon filter-icon" ng-class="{'glyphicon-sort-by-attributes': ascending, 'glyphicon-sort-by-attributes-alt': !ascending}" ng-click="inverseOrder()"></span>
 </div>
