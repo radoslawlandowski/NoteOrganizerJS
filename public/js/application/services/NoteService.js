@@ -16,16 +16,12 @@ define(['angular',
             };
 
             service.send = function(note) {
-                if(angular.isDefined(note._id)) {
-                    return this.edit(note);
-                } else {
-                    return this.create(note);
-                };
+                return angular.isDefined(note._id) ? this.edit(note) : this.create(note);
             };
 
             service.edit = function(note) {
                 if(!isTitleDefined(note)) {
-                return $q.reject(NotificationMessages.NOTE_TITLE_UNDEFINED);
+                    return $q.reject(NotificationMessages.NOTE_TITLE_UNDEFINED);
                 };
                 return $http.put(UrlPaths.notes, note).then(function(response) {
                     return {note: response.data, message: NotificationMessages.NOTE_EDITED};
@@ -55,7 +51,7 @@ define(['angular',
             };
 
             function isTitleDefined(note) {
-                return !angular.isUndefined(note.title);
+                return angular.isDefined(note.title);
             };
 
             function generalError(statusCode) {

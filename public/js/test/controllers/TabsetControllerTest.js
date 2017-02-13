@@ -74,14 +74,9 @@
 
          describe('When controller has just been created', function() {
              it('it should have notes and tabs already initialized', function() {
-                 deferredNoteService.resolve(notes);
-                 deferredTabService.resolve(tabs);
-                 $scope.$apply();
-
                  expect($scope.notes).toEqual(notes);
                  expect($scope.tabs).toEqual(tabs);
              });
-
          });
 
          describe('When sendNote has been called:', function() {

@@ -22,8 +22,7 @@ define(['angular',
                 } else if (doesTabExist(tabs, tabTitle)) {
                     return $q.reject(NotificationMessages.TAB_ALREADY_EXISTS);
                 } else {
-                    var tab = prepareTab(tabTitle);
-                    return $http.post(UrlPaths.tabs, tab).then(function (response) {
+                    return $http.post(UrlPaths.tabs, prepareTab(tabTitle)).then(function (response) {
                         return {tab: response.data, message: NotificationMessages.TAB_CREATED};
                     }, function (failure) {
                         if (failure.status === HttpCodes.CONFLICT.code) {
@@ -63,10 +62,9 @@ define(['angular',
             };
 
             function prepareTab(name) {
-                var tab = {
+                return tab = {
                     "name": name
                 };
-                return tab;
             };
 
             function generalError(statusCode) {

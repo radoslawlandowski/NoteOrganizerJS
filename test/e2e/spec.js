@@ -86,11 +86,9 @@ describe('NoteOrganizer E2E Testing', function() {
       });
   });
 
-  describe('When deleteing the tab', function() {
+  describe('When deleting the tab', function() {
       it('and canceling it should not disappear from the tabset', function() {
-        var tabName = "one";
-
-        expect(tabsetPage.tabDisplayed(tabName)).toEqual(true);
+        var tabName = "newTab";
 
         tabsetPage.getTab(tabName).click();
         tabsetPage.getDeleteTabButton(tabName).click();
@@ -105,7 +103,7 @@ describe('NoteOrganizer E2E Testing', function() {
       });
 
       it('and confirming it should disappear from the tabset', function() {
-        var tabName = "one";
+        var tabName = "newTab";
 
         expect(tabsetPage.tabDisplayed(tabName)).toEqual(true);
 
